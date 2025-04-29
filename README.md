@@ -1,42 +1,84 @@
-# Projeto de Iniciação Tecnológica: AMBIENTAI - Plataforma Inteligente para Monitoramento e Educação Ambiental
+# Turborepo starter
 
-Este repositório contém o código-fonte e os recursos relacionados ao projeto **"AMBIENTAI: Plataforma Inteligente para Monitoramento e Educação Ambiental Integrada em Pinheiral-RJ"**. Este projeto é parte de uma iniciativa de pesquisa tecnológica da Pró-reitoria de Pesquisa e Pós-Graduação do UniFOA.
+This Turborepo starter is maintained by the Turborepo core team.
 
-## Descrição do Projeto
+## Using this example
 
-O projeto visa o desenvolvimento de uma plataforma digital que permita o monitoramento das condições ambientais em tempo real, além de integrar práticas de Educação Ambiental para a comunidade local.  
-A iniciativa utiliza conceitos de **Inteligência Artificial** e **Data Science** para análise inteligente dos dados coletados, buscando sensibilizar a população e promover práticas sustentáveis no município de Pinheiral-RJ.
+Run the following command:
 
-## Equipe do Projeto
+```sh
+npx create-turbo@latest
+```
 
-- Alunos de Sistemas de Informação.
-- Professores dos cursos de Sistemas de Informação e Engenharia Elétrica.
+## What's inside?
 
-## Objetivos
+This Turborepo includes the following packages/apps:
 
-### Para a Comunidade
+### Apps and Packages
 
-- Sensibilizar sobre questões ambientais locais.
-- Promover a prática da Educação Ambiental por meio de tecnologia inteligente e acessível.
+- `docs`: a [Next.js](https://nextjs.org/) app
+- `web`: another [Next.js](https://nextjs.org/) app
+- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
+- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
-### Para os Pesquisadores
+Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-- Desenvolver um protótipo tecnológico de monitoramento ambiental em tempo real.
-- Aplicar técnicas de **Inteligência Artificial** para processamento e interpretação de dados ambientais.
-- Utilizar **Data Science** para extrair insights relevantes e apoiar a tomada de decisões sustentáveis.
-- Subsidiar práticas sustentáveis e possíveis políticas públicas baseadas em evidências.
+### Utilities
 
-## Justificativa
+This Turborepo has some additional tools already setup for you:
 
-Diante do aumento de eventos climáticos extremos, degradação ambiental e escassez de recursos naturais, torna-se essencial entender a realidade local, propor alternativas de educação e desenvolver soluções tecnológicas inovadoras.  
-Este projeto busca contribuir para a preservação ambiental e para o fortalecimento da consciência socioambiental em Pinheiral-RJ, aliando tecnologias emergentes como Inteligência Artificial e Data Science à Educação Ambiental.
+- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [ESLint](https://eslint.org/) for code linting
+- [Prettier](https://prettier.io) for code formatting
 
-## Planejamento de Desenvolvimento
+### Build
 
-O planejamento prevê:
+To build all apps and packages, run the following command:
 
-- Levantamento e coleta de dados ambientais utilizando sensores inteligentes.
-- Desenvolvimento do protótipo de monitoramento com suporte a algoritmos de IA.
-- Aplicação de técnicas de Data Science para análise e visualização dos dados coletados.
-- Implementação do protótipo em uma escola local como piloto de Educação Ambiental.
-- Análise dos resultados e produção de artigo científico baseado nos dados obtidos.
+```
+cd my-turborepo
+pnpm build
+```
+
+### Develop
+
+To develop all apps and packages, run the following command:
+
+```
+cd my-turborepo
+pnpm dev
+```
+
+### Remote Caching
+
+> [!TIP]
+> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+
+Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+
+By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+
+```
+cd my-turborepo
+npx turbo login
+```
+
+This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+
+Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+
+```
+npx turbo link
+```
+
+## Useful Links
+
+Learn more about the power of Turborepo:
+
+- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
+- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
+- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
+- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
+- [Configuration Options](https://turborepo.com/docs/reference/configuration)
+- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
