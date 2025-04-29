@@ -1,5 +1,5 @@
 {
-  "name": "AmbientAI",
+  "name": "ambient-ai",
   "private": true,
   "scripts": {
     "build": "turbo run build",
