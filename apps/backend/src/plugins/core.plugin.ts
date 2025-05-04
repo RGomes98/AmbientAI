@@ -1,10 +1,14 @@
-import type { FastifyPluginCallback } from 'fastify';
+import type { FastifyPluginAsync } from 'fastify';
 import { fastifySwagger } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
 import { fastifyCors } from '@fastify/cors';
 import { jsonSchemaTransform } from 'fastify-type-provider-zod';
+import { fastifyRateLimit } from '@fastify/rate-limit';
+import { ENV } from '@/config/env.config';
 
-export const core: FastifyPluginCallback = (app, _opts, done) => {
+export const core: FastifyPluginAsync = async (app, _opts) => {
+  const isDevEnvironment = ENV.NODE_ENV === 'development';
+
   app.register(fastifyCors, {
     origin: '*',
   });
@@ -20,11 +24,18 @@ export const core: FastifyPluginCallback = (app, _opts, done) => {
     transform: jsonSchemaTransform,
   });
 
-  app.register(fastifySwaggerUi, {
-    routePrefix: '/docs',
-  });
+  if (isDevEnvironment) {
+    app.register(fastifySwaggerUi, {
+      routePrefix: '/docs',
+    });
+  }
 
-  done();
+  if (!isDevEnvironment) {
+    await app.register(fastifyRateLimit, {
+      max: ENV.REQUESTS_PER_MINUTE,
+      timeWindow: '1 minute',
+    });
+  }
 };
 
 Object.defineProperty(core, Symbol.for('skip-override'), { value: true });
