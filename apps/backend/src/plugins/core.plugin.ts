@@ -7,8 +7,6 @@ import { fastifyRateLimit } from '@fastify/rate-limit';
 import { ENV } from '../config/env.config';
 
 export const core: FastifyPluginAsync = async (app, _opts) => {
-  const isDevEnvironment = ENV.NODE_ENV === 'development';
-
   app.register(fastifyCors, {
     origin: '*',
   });
@@ -24,13 +22,13 @@ export const core: FastifyPluginAsync = async (app, _opts) => {
     transform: jsonSchemaTransform,
   });
 
-  if (isDevEnvironment) {
+  if (ENV.NODE_ENV === 'development') {
     app.register(fastifySwaggerUi, {
       routePrefix: '/docs',
     });
   }
 
-  if (!isDevEnvironment) {
+  if (ENV.NODE_ENV === 'production') {
     await app.register(fastifyRateLimit, {
       max: ENV.REQUESTS_PER_MINUTE,
       timeWindow: '1 minute',
