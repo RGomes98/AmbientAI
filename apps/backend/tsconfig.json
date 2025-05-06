@@ -2,19 +2,18 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Node 22",
   "_version": "22.0.0",
+
   "compilerOptions": {
     "lib": ["es2023"],
     "module": "nodenext",
     "target": "es2022",
-    "outDir": "./dist",
-    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "node16",
-    "baseUrl": "./src",
-    "paths": { "@/*": ["*"] }
+    "outDir": "./dist"
   },
-  "include": ["src/**/*"],
+
+  "include": ["src/**/*", "api/index.ts"],
   "exclude": ["node_modules"]
 }
