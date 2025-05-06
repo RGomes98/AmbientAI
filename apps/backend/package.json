@@ -4,7 +4,6 @@
   "description": "",
   "main": "api/index.ts",
   "scripts": {
-    "build": "tsc",
     "dev": "tsx watch --env-file .env.local api/index.ts"
   },
   "keywords": [],
