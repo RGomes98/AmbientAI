@@ -4,7 +4,7 @@ import { fastifySwaggerUi } from '@fastify/swagger-ui';
 import { fastifyCors } from '@fastify/cors';
 import { jsonSchemaTransform } from 'fastify-type-provider-zod';
 import { fastifyRateLimit } from '@fastify/rate-limit';
-import { ENV } from '@/config/env.config';
+import { ENV } from '../config/env.config';
 
 export const core: FastifyPluginAsync = async (app, _opts) => {
   const isDevEnvironment = ENV.NODE_ENV === 'development';
