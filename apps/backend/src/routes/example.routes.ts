@@ -9,8 +9,8 @@ type ErrorExample = z.infer<typeof ErrorExampleSchema>;
 
 const USERS: UserExample[] = [];
 
-export const example = async (app: FastifyTypedInstance) => {
-  app.post(
+export const example = async (instance: FastifyTypedInstance) => {
+  instance.post(
     '/example/users',
     {
       schema: {
@@ -20,15 +20,15 @@ export const example = async (app: FastifyTypedInstance) => {
         response: { 201: UserExampleSchema },
       },
     },
-    async (request, response) => {
+    async (request, reply) => {
       const { name, email } = request.body;
       const user = { id: crypto.randomUUID(), name, email };
       USERS.push(user);
-      return response.status(201).send(user);
+      return reply.status(201).send(user);
     }
   );
 
-  app.get(
+  instance.get(
     '/example/users',
     {
       schema: {
@@ -38,18 +38,18 @@ export const example = async (app: FastifyTypedInstance) => {
         response: { 200: UserExampleSchema.array() },
       },
     },
-    async (request, response) => {
+    async (request, reply) => {
       const { search } = request.query;
 
       const result = search
         ? USERS.filter((user) => user.name.toLowerCase().includes(search.toLowerCase().trim()))
         : USERS;
 
-      return response.status(200).send(result);
+      return reply.status(200).send(result);
     }
   );
 
-  app.patch(
+  instance.patch(
     '/example/users/:id',
     {
       schema: {
@@ -63,19 +63,19 @@ export const example = async (app: FastifyTypedInstance) => {
         },
       },
     },
-    async (request, response) => {
+    async (request, reply) => {
       const { id } = request.params;
       let index = USERS.findIndex((user) => id === user.id);
 
-      if (index === -1) return response.status(404).send({ message: 'User not found' });
+      if (index === -1) return reply.status(404).send({ message: 'User not found' });
       const user = USERS[index];
 
       USERS[index] = { ...user, ...request.body };
-      return response.status(204).send();
+      return reply.status(204).send();
     }
   );
 
-  app.delete(
+  instance.delete(
     '/example/users/:id',
     {
       schema: {
@@ -88,14 +88,14 @@ export const example = async (app: FastifyTypedInstance) => {
         },
       },
     },
-    async (request, response) => {
+    async (request, reply) => {
       const { id } = request.params;
 
       const index = USERS.findIndex((user) => id === user.id);
-      if (index === -1) return response.status(404).send({ message: 'User not found' });
+      if (index === -1) return reply.status(404).send({ message: 'User not found' });
 
       USERS.splice(index, 1);
-      return response.status(204).send();
+      return reply.status(204).send();
     }
   );
 };

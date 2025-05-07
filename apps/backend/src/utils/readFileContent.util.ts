@@ -3,10 +3,7 @@ import { join } from 'path';
 
 export function readFileContent(filePath: string) {
   try {
-    const path = join(__dirname, filePath);
-    console.log(path, 'path');
-
-    const content = readFileSync(path, 'utf-8').trim();
+    const content = readFileSync(join(__dirname, filePath), 'utf-8').trim();
     if (!content) throw new Error(`${filePath} file is empty or invalid`);
     return content;
   } catch (err) {

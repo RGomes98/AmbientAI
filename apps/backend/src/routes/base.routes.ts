@@ -16,7 +16,7 @@ const html = `
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
     />
-    <title>AmbientAI API - ${appVersion}</title>
+    <title>AmbientAI API</title>
     <meta
       name="description"
       content="AmbientAI API é uma API moderna construída com Fastify e Zod, pronta para ambientes serverless como Vercel."
@@ -45,8 +45,8 @@ const html = `
 </html>
 `;
 
-export const base = async (app: FastifyTypedInstance) => {
-  app.get('/', { schema: { hide: true } }, async (_request: FastifyRequest, reply: FastifyReply) => {
+export const base = async (instance: FastifyTypedInstance) => {
+  instance.get('/', { schema: { hide: true } }, async (_request: FastifyRequest, reply: FastifyReply) => {
     return reply.status(200).type('text/html').send(html);
   });
 };
