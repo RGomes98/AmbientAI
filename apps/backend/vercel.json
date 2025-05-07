@@ -1,3 +1,4 @@
 {
+  "includeFiles": ["VERSION"],
   "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
 }
