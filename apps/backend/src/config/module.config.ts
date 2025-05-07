@@ -5,7 +5,7 @@ import { fastifySwagger } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
 import { jsonSchemaTransform } from 'fastify-type-provider-zod';
 import { readFileContent } from '../utils/readFileContent.util';
-import { ENV } from './env.config';
+import { ENV } from '../env';
 
 type ModuleRegister = (instance: FastifyInstance) => void | Promise<void>;
 

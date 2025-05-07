@@ -1,7 +1,7 @@
 import { validatorCompiler, serializerCompiler } from 'fastify-type-provider-zod';
 import { core } from '../src/plugins/core.plugin';
 import { app } from '../src/config/app.config';
-import { ENV } from '../src/config/env.config';
+import { ENV } from '../src/env';
 
 // Routes
 import { base } from '../src/routes/base.routes';

@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { FastifyTypedInstance } from '../config/app.config';
 import { readFileContent } from '../utils/readFileContent.util';
-import { ENV } from '../config/env.config';
+import { ENV } from '../env';
 
 const rawVersion = readFileContent('../../VERSION');
 const appVersion = ENV.NODE_ENV === 'development' ? (rawVersion ? `v${rawVersion}` : 'unknown') : 'PROD';

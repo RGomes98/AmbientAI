@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify';
 import { DEFAULT_MODULES, ENVIRONMENT_MODULES } from '../config/module.config';
-import { ENV } from '../config/env.config';
+import { ENV } from '../env';
 
 export const core: FastifyPluginAsync = async (instance) => {
   DEFAULT_MODULES['cors'](instance);

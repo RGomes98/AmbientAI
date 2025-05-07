@@ -1,11 +1,7 @@
+import type { UserExample } from '../schemas/routes/example.schema';
 import type { FastifyTypedInstance } from '../config/app.config';
+import { ErrorExampleSchema, UserExampleSchema } from '../schemas/routes/example.schema';
 import { z } from 'zod';
-
-const UserExampleSchema = z.object({ id: z.string().uuid(), name: z.string(), email: z.string().email() });
-const ErrorExampleSchema = z.object({ message: z.string() });
-
-type UserExample = z.infer<typeof UserExampleSchema>;
-type ErrorExample = z.infer<typeof ErrorExampleSchema>;
 
 const USERS: UserExample[] = [];
 
