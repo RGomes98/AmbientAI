@@ -5,6 +5,7 @@ import { fastifyCors } from '@fastify/cors';
 import { jsonSchemaTransform } from 'fastify-type-provider-zod';
 import { fastifyRateLimit } from '@fastify/rate-limit';
 import { ENV } from '../config/env.config';
+import { readFileContent } from '../utils/readFileContent.util';
 
 export const core: FastifyPluginAsync = async (app, _opts) => {
   app.register(fastifyCors, {
@@ -12,14 +13,14 @@ export const core: FastifyPluginAsync = async (app, _opts) => {
   });
 
   app.register(fastifySwagger, {
+    transform: jsonSchemaTransform,
     openapi: {
       info: {
-        version: '1.0.0',
         title: 'AmbientAI API',
-        description: 'Documentation for the AmbientAI API.',
+        version: readFileContent('../../VERSION') ?? 'unknown',
+        description: readFileContent('../../CHANGELOG.md')?.split('\n').slice(6).join('\n'),
       },
     },
-    transform: jsonSchemaTransform,
   });
 
   if (ENV.NODE_ENV === 'development') {
