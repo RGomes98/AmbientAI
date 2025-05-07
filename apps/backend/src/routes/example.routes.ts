@@ -1,7 +1,12 @@
 import type { UserExample } from '../schemas/routes/example.schema';
 import type { FastifyTypedInstance } from '../config/app.config';
-import { ErrorExampleSchema, UserExampleSchema } from '../schemas/routes/example.schema';
-import { z } from 'zod';
+
+import {
+  ErrorExampleSchema,
+  UserExampleDelete,
+  UserExampleGetQuery,
+  UserExampleSchema,
+} from '../schemas/routes/example.schema';
 
 const USERS: UserExample[] = [];
 
@@ -30,7 +35,7 @@ export const example = async (instance: FastifyTypedInstance) => {
       schema: {
         tags: ['Example'],
         description: "Example 'GET' endpoint",
-        querystring: z.object({ search: z.string().optional() }),
+        querystring: UserExampleGetQuery,
         response: { 200: UserExampleSchema.array() },
       },
     },
@@ -79,7 +84,7 @@ export const example = async (instance: FastifyTypedInstance) => {
         description: "Example 'DELETE' endpoint",
         params: UserExampleSchema.pick({ id: true }),
         response: {
-          204: z.void(),
+          204: UserExampleDelete,
           404: ErrorExampleSchema,
         },
       },
