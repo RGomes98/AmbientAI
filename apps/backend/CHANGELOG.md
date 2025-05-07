@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Created initial CHANGELOG.md to track changes.
   - Added README.md with setup instructions.
   - Introduced VERSION in project files (e.g., Swagger and landing page).
-- `readFileContent` utility function: Added a function to safely read file content with error handling for empty or invalid files.
+- `readFileContent` and `readPackageVersion`: Added utility functions to safely read file content and validate the `package.json` version using Zod, with robust error handling.
 
 ### Infrastructure
 

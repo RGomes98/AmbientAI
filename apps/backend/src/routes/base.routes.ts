@@ -1,10 +1,8 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { FastifyTypedInstance } from '../config/app.config';
-import { readFileContent } from '../utils/readFileContent.util';
-import { ENV } from '../env';
+import { readPackageVersion } from '../utils/file.utils';
 
-const rawVersion = readFileContent('../../VERSION');
-const appVersion = ENV.NODE_ENV === 'development' ? (rawVersion ? `v${rawVersion}` : 'unknown') : 'PROD';
+const version = readPackageVersion();
 
 const html = `
 <!DOCTYPE html>
@@ -16,14 +14,17 @@ const html = `
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
     />
-    <title>AmbientAI API</title>
+    <title>AmbientAI</title>
     <meta
       name="description"
       content="AmbientAI API é uma API moderna construída com Fastify e Zod, pronta para ambientes serverless como Vercel."
     />
   </head>
   <body style="padding-block: 0; padding-inline: 1rem; height: 100vh; display: flex; flex-direction: column; justify-content: center;">
-    <h1>AmbientAI API <code>${appVersion}</code></h1>
+    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: .875rem;">
+      <h1 style="margin-bottom: 0; padding-top: 0;">AmbientAI API</h1>
+      <code aria-label="API Version" style="color: var(--nc-tx-1); font-weight: bold; line-height: initial;">${version ? `v${version}` : 'unknown'}</code>
+    </div>
     <p>
       Construída com <code>Fastify</code> para alto desempenho e <code>Zod</code> para validação de dados e tipagem segura. Foi projetada para rodar em ambientes serverless, como <strong>Vercel</strong>, garantindo facilidade de deploy e manutenção.
     </p>

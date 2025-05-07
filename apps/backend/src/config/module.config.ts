@@ -4,7 +4,7 @@ import { fastifyRateLimit } from '@fastify/rate-limit';
 import { fastifySwagger } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
 import { jsonSchemaTransform } from 'fastify-type-provider-zod';
-import { readFileContent } from '../utils/readFileContent.util';
+import { readFileContent, readPackageVersion } from '../utils/file.utils';
 import { ENV } from '../env';
 
 type ModuleRegister = (instance: FastifyInstance) => void | Promise<void>;
@@ -31,7 +31,7 @@ const ENVIRONMENT_MODULES: Record<typeof ENV.NODE_ENV, ModuleRegister> = {
       openapi: {
         info: {
           title: 'AmbientAI API',
-          version: readFileContent('../../VERSION') ?? 'unknown',
+          version: readPackageVersion() ?? 'unknown',
           description: readFileContent('../../CHANGELOG.md')?.split('\n').slice(6).join('\n'),
         },
       },
