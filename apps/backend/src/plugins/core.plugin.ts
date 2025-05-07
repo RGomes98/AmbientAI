@@ -12,18 +12,18 @@ export const core: FastifyPluginAsync = async (app, _opts) => {
     origin: '*',
   });
 
-  app.register(fastifySwagger, {
-    transform: jsonSchemaTransform,
-    openapi: {
-      info: {
-        title: 'AmbientAI API',
-        version: readFileContent('../../VERSION') ?? 'unknown',
-        description: readFileContent('../../CHANGELOG.md')?.split('\n').slice(6).join('\n'),
-      },
-    },
-  });
-
   if (ENV.NODE_ENV === 'development') {
+    app.register(fastifySwagger, {
+      transform: jsonSchemaTransform,
+      openapi: {
+        info: {
+          title: 'AmbientAI API',
+          version: readFileContent('../../VERSION') ?? 'unknown',
+          description: readFileContent('../../CHANGELOG.md')?.split('\n').slice(6).join('\n'),
+        },
+      },
+    });
+
     app.register(fastifySwaggerUi, {
       routePrefix: '/docs',
     });
