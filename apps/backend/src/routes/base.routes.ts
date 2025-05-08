@@ -21,7 +21,7 @@ const html = `
       content="AmbientAI API é uma API moderna construída com Fastify e Zod, pronta para ambientes serverless como Vercel."
     />
   </head>
-  <body style="padding-block: 2rem; padding-inline: 1.5rem; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+  <body style="padding-block: 2rem; padding-inline: 1.5rem; min-height: calc(100vh - 4rem); display: flex; flex-direction: column; justify-content: center;">
     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 8px; border-bottom: 1px solid var(--nc-bg-2);">
       <h1 style="margin-bottom: 0; padding-top: 0; border-bottom: 0;">AmbientAI API</h1>
       <code aria-label="API Version" style="color: var(--nc-tx-1); font-weight: bold; line-height: initial;">${version ? `v${version}` : 'unknown'}</code>
