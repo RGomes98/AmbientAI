@@ -1,8 +1,9 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { FastifyTypedInstance } from '../config/app.config';
+import { ENV } from '../env';
 import { readPackageVersion } from '../utils/file.utils';
 
-const version = readPackageVersion();
+const version = ENV.NODE_ENV === 'production' ? ENV.VERSION : readPackageVersion();
 
 const html = `
 <!DOCTYPE html>

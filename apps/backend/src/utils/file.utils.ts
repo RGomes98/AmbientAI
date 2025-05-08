@@ -2,27 +2,22 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import { VersionSchema } from '../schemas/utils/file.schema';
 
-function readFileContent(relativePath: string) {
+const readFileContent = (path: string) => {
   try {
-    const fullPath = join(__dirname, relativePath);
-    const content = readFileSync(fullPath, 'utf-8').trim();
-
-    if (!content) throw new Error(`${relativePath} file is empty or invalid`);
+    const content = readFileSync(join(process.cwd(), path), 'utf-8').trim();
+    if (!content) throw new Error(`${path} file is empty or invalid`);
     return content;
   } catch (err) {
-    console.warn(`Failed to read file "${relativePath}":`, err);
+    console.warn(`Failed to read file "${path}": ${err}`);
     return null;
   }
-}
+};
 
 function readPackageVersion() {
   try {
-    const pkgPath = join(process.cwd(), 'package.json');
-    const rawContent = readFileSync(pkgPath, 'utf-8').trim();
-
-    const version = VersionSchema.safeParse(JSON.parse(rawContent)?.version);
+    const json = readFileSync(join(process.cwd(), 'vercel.json'), 'utf-8').trim();
+    const version = VersionSchema.safeParse(JSON.parse(json).env?.VERSION);
     if (!version.success) throw new Error("Invalid semantic version in 'package.json'");
-
     return version.data;
   } catch (err) {
     console.warn(err);

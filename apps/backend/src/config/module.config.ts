@@ -10,7 +10,7 @@ import { ENV } from '../env';
 type ModuleRegister = (instance: FastifyInstance) => void | Promise<void>;
 
 const DEFAULT_MODULES = {
-  cors: (instance) => {
+  CORS: (instance) => {
     instance.register(fastifyCors, { origin: '*' });
   },
 } as const satisfies Record<string, ModuleRegister>;
@@ -32,7 +32,7 @@ const ENVIRONMENT_MODULES: Record<typeof ENV.NODE_ENV, ModuleRegister> = {
         info: {
           title: 'AmbientAI API',
           version: readPackageVersion() ?? 'unknown',
-          description: readFileContent('../../CHANGELOG.md')?.split('\n').slice(6).join('\n'),
+          description: readFileContent('CHANGELOG.md')?.split('\n').slice(6).join('\n'),
         },
       },
     });

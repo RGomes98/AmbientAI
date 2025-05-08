@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `DELETE /example/users/:id` – Delete a user by ID.
 - Serverless-compatible entry point (`export default handler`) for Vercel deployment.
 - TypeScript setup with Fastify type provider and Zod integration.
-- Created CHANGELOG.md, README.md, and VERSION:
+- Created CHANGELOG.md and README.md:
   - Created initial CHANGELOG.md to track changes.
   - Added README.md with setup instructions.
   - Introduced VERSION in project files (e.g., Swagger and landing page).
