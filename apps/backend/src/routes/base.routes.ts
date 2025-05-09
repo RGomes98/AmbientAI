@@ -1,9 +1,13 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { FastifyTypedInstance } from '../config/app.config';
+import { VersionSchema } from '../schemas/utils/file.schema';
+import { readFileContent } from '../utils/file.utils';
 import { ENV } from '../env';
-import { readPackageVersion } from '../utils/file.utils';
 
-const version = ENV.NODE_ENV === 'production' ? ENV.VERSION : readPackageVersion();
+const version =
+  ENV.NODE_ENV === 'production'
+    ? ENV.VERSION
+    : readFileContent('vercel.json', VersionSchema, (json) => json.env?.VERSION);
 
 const html = `
 <!DOCTYPE html>
