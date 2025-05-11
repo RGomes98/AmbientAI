@@ -40,3 +40,8 @@ O planejamento prevê:
 - Aplicação de técnicas de Data Science para análise e visualização dos dados coletados.
 - Implementação do protótipo em uma escola local como piloto de Educação Ambiental.
 - Análise dos resultados e produção de artigo científico baseado nos dados obtidos.
+
+## Links
+
+- **Link do site**: [AmbientAI](https://ambient-ai-frontend.vercel.app/)
+- **Link da API**: [AmbientAI API](https://ambient-ai-backend.vercel.app/)
