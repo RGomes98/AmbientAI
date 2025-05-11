@@ -26,8 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Created CHANGELOG.md and README.md:
   - Created initial CHANGELOG.md to track changes.
   - Added README.md with setup instructions.
-  - Introduced VERSION in project files (e.g., Swagger and landing page).
-- `readFileContent` and `readPackageVersion`: Added utility functions to safely read file content and validate the `package.json` version using Zod, with robust error handling.
+- Introduced centralized version management using the `VERSION` environment variable in `vercel.json` (used in Swagger and landing page).
+- `readFileContent`: Utility function to read and validate file contents using a Zod schema, with robust error handling and optional JSON selection.
 
 ### Infrastructure
 
