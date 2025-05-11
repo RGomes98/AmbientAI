@@ -7,7 +7,7 @@ import { ENV } from '../env';
 const version =
   ENV.NODE_ENV === 'production'
     ? ENV.VERSION
-    : readFileContent('vercel.json', VersionSchema, (json) => json.env?.VERSION);
+    : readFileContent('vercel.json', VersionSchema, (json) => json.env.VERSION);
 
 const html = `
 <!DOCTYPE html>

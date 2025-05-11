@@ -3,21 +3,25 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 export const readFileContent = <T>(
-  fileName: string,
-  schema: Schema<T>,
+  filePath: string,
+  fileSchema: Schema<T>,
   JSONSelector?: (json: any) => any
 ) => {
   try {
-    const path = join(process.cwd(), fileName);
-    const content = readFileSync(path, 'utf-8').trim();
+    const fullPath = join(process.cwd(), filePath);
+    const rawFile = readFileSync(fullPath, 'utf-8').trim();
 
-    const value = typeof JSONSelector === 'function' ? JSONSelector(JSON.parse(content)) : content;
-    const result = schema.safeParse(value);
+    const content = JSONSelector ? JSONSelector(JSON.parse(rawFile)) : rawFile;
+    const result = fileSchema.safeParse(content);
 
-    if (!result.success) throw new Error(`${fileName} file is empty or invalid`);
+    if (!result.success) {
+      const error = result.error.format()._errors.at(0) ?? 'Schema validation failed';
+      throw new Error(`"${filePath}" does not match expected format. ${error}.`);
+    }
+
     return result.data;
-  } catch (err) {
-    console.warn(`Failed to read file "${fileName}": ${err}`);
+  } catch (error) {
+    console.warn(`Failed to read or parse "${filePath}".`, error);
     return null;
   }
 };
