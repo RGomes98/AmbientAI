@@ -13,33 +13,49 @@ type ModuleRegister = (instance: FastifyInstance) => void | Promise<void>;
 
 const DEFAULT_MODULES = {
   CORS: (instance) => {
-    instance.register(fastifyCors, { origin: '*' });
+    instance.register(fastifyCors, {
+      origin: '*',
+      methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+    });
   },
 } as const satisfies Record<string, ModuleRegister>;
 
 const ENVIRONMENT_MODULES: Record<typeof ENV.NODE_ENV, ModuleRegister> = {
   test: () => {},
 
-  production: async (instance) => {
-    await instance.register(fastifyRateLimit, {
-      max: ENV.REQUESTS_PER_MINUTE,
-      timeWindow: '1 minute',
-    });
-  },
-
   development: (instance) => {
+    const version = readFileContent('vercel.json', VersionSchema, (json) => json.env.VERSION);
+    const changelog = readFileContent('CHANGELOG.md', z.string())?.split('\n').slice(6).join('\n');
+
     instance.register(fastifySwagger, {
       transform: jsonSchemaTransform,
       openapi: {
         info: {
           title: 'AmbientAI API',
-          description: readFileContent('CHANGELOG.md', z.string())?.split('\n').slice(6).join('\n'),
-          version: readFileContent('vercel.json', VersionSchema, (json) => json.env?.VERSION) ?? 'unknown',
+          version: version ?? 'unknown',
+          description: changelog ?? 'No changelog available.',
         },
       },
     });
 
     instance.register(fastifySwaggerUi, { routePrefix: '/docs' });
+  },
+
+  production: async (instance) => {
+    await instance.register(fastifyRateLimit, {
+      max: ENV.REQUESTS_PER_MINUTE,
+      timeWindow: '1 minute',
+      addHeaders: {
+        'x-ratelimit-limit': true,
+        'x-ratelimit-remaining': true,
+        'x-ratelimit-reset': true,
+      },
+      errorResponseBuilder: (_request, context) => ({
+        statusCode: 429,
+        error: 'Too Many Requests',
+        message: `Rate limit exceeded. Try again in ${context.after}`,
+      }),
+    });
   },
 };
 
