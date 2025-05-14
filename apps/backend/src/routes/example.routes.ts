@@ -1,4 +1,4 @@
-import type { UserExample } from '../schemas/routes/example.schema';
+import type { UserExample } from '../lib/schemas/routes/example.schema';
 import type { FastifyTypedInstance } from '../config/app.config';
 
 import {
@@ -6,7 +6,7 @@ import {
   UserExampleDelete,
   UserExampleGetQuery,
   UserExampleSchema,
-} from '../schemas/routes/example.schema';
+} from '../lib/schemas/routes/example.schema';
 
 const USERS: UserExample[] = [];
 

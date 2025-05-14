@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { FastifyTypedInstance } from '../config/app.config';
-import { VersionSchema } from '../schemas/utils/file.schema';
+import { VersionSchema } from '../lib/schemas/utils/file.schema';
 import { readFileContent } from '../utils/file.utils';
 import { ENV } from '../env';
 
