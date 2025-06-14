@@ -4,7 +4,7 @@ import { Role } from '../../generated/prisma';
 
 const TokenSchema = z.object({
   access_token: z.string(),
-  token_type: z.literal('Bearer'),
+  token_type: z.enum(['Bearer']),
 });
 
 const SessionSchema = z.object({

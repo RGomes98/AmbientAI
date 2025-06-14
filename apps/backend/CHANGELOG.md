@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- API Keys system:
+
+  - Introduced API key hashing, validation, and storage mechanism.
+  - Implemented `ApiKeyGuard` for API key-based authentication.
+  - Defined API key format validation (`ard_` prefix) using Zod schemas.
+
 - Authentication module:
 
   - Added user authentication flow including controllers, services, repositories, domains, routes, plugins, utils, and validators.
@@ -23,29 +29,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - Updated the Prisma database schema to support authentication and roles.
 
-- Environment configuration:
-
-  - Updated `.env.example` documentation with new variables required for authentication.
-
-### Changed
-
-- Project structure:
-
-  - Improved overall app folder organization to follow domain-driven patterns.
-
-- Routing:
-
-  - Removed example routes.
-
-- Database:
-
   - Added initial Prisma setup for PostgreSQL:
 
     - Created `schema.prisma` with datasource and generator configurations.
     - Added environment variables `POSTGRES_DATABASE_URL` and `POSTGRES_DATABASE_URL_NON_POOLING`.
     - Introduced `prisma` singleton instance for database access (`src/lib/database/prisma.database.ts`).
 
-  - Extended environment schema validation (`EnvSchema`) to include new database environment variables.
+  - Environment configuration:
+
+    - Extended `.env.example` documentation with new variables required for authentication.
+    - Extended environment schema validation (`EnvSchema`) to include new database environment variables.
+
+### Changed
+
+- Refactored project structure:
+
+  - Removed legacy route decorators.
+  - Improved plugin naming conventions for better clarity and maintainability.
+  - Improved overall app folder organization to follow domain-driven patterns.
+
+- Improved Zod schema structures:
+
+  - Modularized and cleaned up existing schemas.
+  - Enhanced validation error messages for better API client feedback.
+
+- Routing:
+
+  - Removed example routes.
 
 ## [1.0.0]
 
