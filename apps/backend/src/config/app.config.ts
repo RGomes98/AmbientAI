@@ -7,7 +7,7 @@ import { swagger } from '../plugins/swagger.plugin';
 import { authenticate } from '../plugins/authenticate.plugin';
 
 import { handler } from '../lib/error/handler.error';
-import { Auth } from '../utils/auth.util';
+import { AuthGuard } from '../utils/auth.util';
 
 // Create Fastify app with Zod support
 export const app = fastify().withTypeProvider<ZodTypeProvider>();
@@ -26,4 +26,5 @@ app.register(swagger);
 app.register(authenticate);
 
 // Register Decorators
-app.decorate('authenticate', Auth.verify);
+app.decorate('authenticate', AuthGuard.verify);
+app.decorate('requireRole', AuthGuard.requireRole);

@@ -23,13 +23,13 @@ const loginValidation = {
 };
 
 const meValidation = {
-  onRequest: [app.authenticate],
   schema: {
     tags: ['Auth'],
     description: "Retrieves the authenticated user's account details.",
     security: [{ bearerAuth: [] }],
     response: { 200: UserSchema.omit({ password: true }) },
   },
+  onRequest: [app.authenticate],
 };
 
 export { registerValidation, loginValidation, meValidation };

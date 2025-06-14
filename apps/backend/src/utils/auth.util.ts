@@ -1,7 +1,21 @@
 import type { FastifyRequest } from 'fastify';
+import type { Role } from '../generated/prisma';
+import { AuthenticationError, AuthorizationError } from '../lib/error/http.error';
+import { Session } from './session.util';
 
-export class Auth {
+export class AuthGuard {
   public static async verify(request: FastifyRequest) {
-    return await request.jwtVerify();
+    try {
+      return await request.jwtVerify();
+    } catch (err) {
+      throw new AuthenticationError();
+    }
+  }
+
+  public static requireRole(allowedRoles: Role[]) {
+    return async (request: FastifyRequest) => {
+      const { role } = Session.validate(request.user);
+      if (!allowedRoles.includes(role)) throw new AuthorizationError();
+    };
   }
 }

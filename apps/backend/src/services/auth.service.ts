@@ -9,6 +9,7 @@ export class AuthService {
 
   public async createUser({ email, password }: UserCreate) {
     const existingUser = await this.repository.findByEmail(email);
+
     if (existingUser) {
       throw new ConflictError('An account with this email already exists.');
     }
@@ -21,11 +22,13 @@ export class AuthService {
 
   public async createTokenPayload({ email, password }: UserCreate) {
     const existingUser = await this.repository.findByEmail(email);
+
     if (!existingUser) {
       throw new AuthenticationError('Invalid email or password.');
     }
 
     const isPasswordCorrect = await Crypto.compare(password, existingUser.password);
+
     if (!isPasswordCorrect) {
       throw new AuthenticationError('Invalid email or password.');
     }
@@ -42,6 +45,7 @@ export class AuthService {
     const { userId } = Session.validate(user);
 
     const existingUser = await this.repository.findById(userId);
+
     if (!existingUser) {
       throw new NotFoundError('No account found for the provided user ID.');
     }
