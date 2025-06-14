@@ -4,10 +4,9 @@
   "description": "",
   "main": "api/index.ts",
   "scripts": {
-    "clean:prisma": "rimraf ./src/generated/prisma",
-    "prisma:generate": "npm run clean:prisma && npx prisma generate",
-    "prisma:migrate": "npm run clean:prisma && npx prisma migrate dev",
-    "prisma:reset": "npm run clean:prisma && npx prisma migrate reset",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:reset": "npx prisma migrate reset",
     "prisma:studio": "npx prisma studio",
     "dev": "tsx watch --env-file .env api/index.ts"
   },
@@ -32,7 +31,6 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.15.3",
     "prisma": "^6.7.0",
-    "rimraf": "^6.0.1",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }
