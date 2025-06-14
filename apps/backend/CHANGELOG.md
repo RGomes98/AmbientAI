@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - API Keys system:
+
   - Introduced API key hashing, validation, and storage mechanism.
   - Implemented `ApiKeyGuard` for API key-based authentication.
   - Defined API key format validation (`ard_` prefix) using Zod schemas.
@@ -22,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Improved plugin naming conventions for better clarity and maintainability.
 
 - Improved Zod schema structures:
+
   - Modularized and cleaned up existing schemas.
   - Enhanced validation error messages for better API client feedback.
 
