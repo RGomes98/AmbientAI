@@ -1,6 +1,6 @@
-import { app } from '../config/app.config';
 import { UserCreateSchema, UserLoginSchema, UserSchema } from '../domain/user/user.schema';
 import { TokenSchema } from '../domain/session/session.schema';
+import { AuthGuard } from '../utils/auth.util';
 
 const registerValidation = {
   schema: {
@@ -29,7 +29,7 @@ const meValidation = {
     security: [{ bearerAuth: [] }],
     response: { 200: UserSchema.omit({ password: true }) },
   },
-  onRequest: [app.authenticate],
+  onRequest: [AuthGuard.verify],
 };
 
 export { registerValidation, loginValidation, meValidation };
