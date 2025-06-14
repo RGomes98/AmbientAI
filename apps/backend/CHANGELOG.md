@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0]
+
+### Added
+
+- Database:
+
+  - Added initial Prisma setup for PostgreSQL:
+
+    - Created `schema.prisma` with datasource and generator configurations.
+    - Added environment variables `POSTGRES_DATABASE_URL` and `POSTGRES_DATABASE_URL_NON_POOLING`.
+    - Introduced `prisma` singleton instance for database access (`src/lib/database/prisma.database.ts`).
+
+  - Extended environment schema validation (`EnvSchema`) to include new database environment variables.
+
 ## [1.0.0]
 
 ### Added

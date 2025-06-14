@@ -7,7 +7,7 @@ import { jsonSchemaTransform } from 'fastify-type-provider-zod';
 import { ENV } from '../env';
 import { z } from 'zod';
 import { readFileContent } from '../utils/file.utils';
-import { VersionSchema } from '../schemas/utils/file.schema';
+import { VersionSchema } from '../lib/schemas/utils/file.schema';
 
 type ModuleRegister = (instance: FastifyInstance) => void | Promise<void>;
 
