@@ -7,7 +7,7 @@ export class ApiKeyService {
   constructor(private repository: ApiKeyRepository) {}
 
   public async createSessionFromApiKey(plainKey: string) {
-    const hashedApiKey = ApiKeyFactory.createHash(plainKey);
+    const hashedApiKey = ApiKeyFactory.hashKey(plainKey);
     const apiKeyRecord = await this.repository.findByHashedKey(hashedApiKey);
 
     if (!apiKeyRecord) {
