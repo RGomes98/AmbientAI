@@ -23,7 +23,7 @@ const html = `
     <title>AmbientAI</title>
     <meta
       name="description"
-      content="AmbientAI API é uma API moderna construída com Fastify e Zod, pronta para ambientes serverless como Vercel."
+      content="AmbientAI API é uma API moderna construída com Fastify, TypeScript, Zod e Prisma, pronta para ambientes serverless como Vercel."
     />
   </head>
   <body style="padding-block: 2rem; padding-inline: 1.5rem; min-height: calc(100vh - 4rem); display: flex; flex-direction: column; justify-content: center;">
@@ -32,19 +32,20 @@ const html = `
       <code aria-label="API Version" style="color: var(--nc-tx-1); font-weight: bold; line-height: initial;">${version ? `v${version}` : 'unknown'}</code>
     </div>
     <p>
-      Construída com <code>Fastify</code> para alto desempenho e <code>Zod</code> para validação de dados e tipagem segura. Foi projetada para rodar em ambientes serverless, como <strong>Vercel</strong>, garantindo facilidade de deploy e manutenção.
+      Construída com <code>Fastify</code> para alto desempenho, <code>TypeScript</code> para tipagem segura, <code>Zod</code> para validação de dados e <code>Prisma</code> como ORM. Foi projetada para rodar em ambientes serverless, como <strong>Vercel</strong>, garantindo facilidade de deploy e manutenção.
     </p>
-
     <h2>Documentação</h2>
     <p>
       Em modo desenvolvimento, você pode acessar a documentação da API em <a href="/docs"><code>/docs</code></a> para explorar os endpoints disponíveis.
     </p>
-
     <h2>Stack</h2>
     <ul>
       <li><code>Fastify</code> – Framework de servidor web rápido e leve.</li>
+      <li><code>TypeScript</code> – Tipagem estática para maior segurança em tempo de desenvolvimento.</li>
       <li><code>Zod</code> – Biblioteca para validação e tipagem de dados.</li>
+      <li><code>Prisma</code> – ORM moderno para PostgreSQL.</li>
       <li><code>@fastify/swagger</code> – Para gerar e servir a documentação Swagger da API.</li>
+      <li><code>@fastify/jwt</code> – Autenticação baseada em JWT.</li>
       <li><code>@fastify/rate-limit</code> – Controle de taxa de requisições.</li>
       <li><code>@fastify/cors</code> – Configuração de CORS flexível, permitindo o controle de acesso entre domínios.</li>
     </ul>
