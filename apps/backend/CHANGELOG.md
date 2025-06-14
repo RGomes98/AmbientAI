@@ -9,6 +9,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Authentication module:
+
+  - Added user authentication flow including controllers, services, repositories, domains, routes, plugins, utils, and validators.
+  - Introduced role validation for authenticated sessions.
+
+- Error handling:
+
+  - Implemented a global error handler for consistent error responses.
+  - Added support for custom HTTP exceptions.
+
+- Database:
+
+  - Updated the Prisma database schema to support authentication and roles.
+
+- Environment configuration:
+
+  - Updated `.env.example` documentation with new variables required for authentication.
+
+### Changed
+
+- Project structure:
+
+  - Improved overall app folder organization to follow domain-driven patterns.
+
+- Routing:
+
+  - Removed example routes.
+
 - Database:
 
   - Added initial Prisma setup for PostgreSQL:

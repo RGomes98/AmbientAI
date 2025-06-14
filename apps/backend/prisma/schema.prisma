@@ -14,3 +14,18 @@ datasource db {
   url       = env("POSTGRES_DATABASE_URL")
   directUrl = env("POSTGRES_DATABASE_URL_NON_POOLING")
 }
+
+enum Role {
+  DEVICE_WRITER
+  ADMIN
+  VIEWER
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      Role     @default(VIEWER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

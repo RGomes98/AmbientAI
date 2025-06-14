@@ -1,10 +1,33 @@
-import type { FastifyPluginAsync } from 'fastify';
-import { DEFAULT_MODULES, ENVIRONMENT_MODULES } from '../config/module.config';
+import type { FastifyInstance } from 'fastify';
+import { fastifyPlugin } from 'fastify-plugin';
+import { fastifyCors } from '@fastify/cors';
+import { fastifyRateLimit } from '@fastify/rate-limit';
+import { fastifyFormbody } from '@fastify/formbody';
+
 import { ENV } from '../env';
 
-export const core: FastifyPluginAsync = async (instance) => {
-  DEFAULT_MODULES['CORS'](instance);
-  ENVIRONMENT_MODULES[ENV.NODE_ENV](instance);
+const plugin = async (instance: FastifyInstance) => {
+  instance.register(fastifyFormbody);
+
+  instance.register(fastifyCors, {
+    origin: '*',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  });
+
+  await instance.register(fastifyRateLimit, {
+    max: ENV.REQUESTS_PER_MINUTE,
+    timeWindow: '1 minute',
+    addHeaders: {
+      'x-ratelimit-limit': true,
+      'x-ratelimit-remaining': true,
+      'x-ratelimit-reset': true,
+    },
+    errorResponseBuilder: (_request, context) => ({
+      statusCode: 429,
+      error: 'Too Many Requests',
+      message: `Rate limit exceeded. Try again in ${context.after}`,
+    }),
+  });
 };
 
-Object.defineProperty(core, Symbol.for('skip-override'), { value: true });
+export const core = fastifyPlugin(plugin, { name: 'core-plugin' });

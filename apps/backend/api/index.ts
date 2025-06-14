@@ -1,16 +1,14 @@
-import { core } from '../src/plugins/core.plugin';
+import { base } from '../src/routes/base.routes';
+import { auth } from '../src/routes/auth.routes';
+
 import { app } from '../src/config/app.config';
 import { ENV } from '../src/env';
 
 // Routes
-import { base } from '../src/routes/base.routes';
-import { example } from '../src/routes/example.routes';
-
-// Register plugins and routes
-app.register(core);
 app.register(base);
-app.register(example);
+app.register(auth);
 
+// Development Server
 if (ENV.NODE_ENV === 'development') {
   (async function initDevServer() {
     try {
@@ -23,7 +21,7 @@ if (ENV.NODE_ENV === 'development') {
   })();
 }
 
-// Vercel's serverless function entry point
+// Vercel's Serverless Function Entry Point
 export default async function handler(request: any, reply: any) {
   await app.ready();
   app.server.emit('request', request, reply);
