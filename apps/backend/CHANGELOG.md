@@ -37,6 +37,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - Removed example routes.
 
+- Database:
+
+  - Added initial Prisma setup for PostgreSQL:
+
+    - Created `schema.prisma` with datasource and generator configurations.
+    - Added environment variables `POSTGRES_DATABASE_URL` and `POSTGRES_DATABASE_URL_NON_POOLING`.
+    - Introduced `prisma` singleton instance for database access (`src/lib/database/prisma.database.ts`).
+
+  - Extended environment schema validation (`EnvSchema`) to include new database environment variables.
+
 ## [1.0.0]
 
 ### Added
