@@ -9,8 +9,8 @@ A iniciativa utiliza conceitos de **Inteligência Artificial** e **Data Science*
 
 ## Equipe do Projeto
 
-- Alunos dos cursos de Sistemas de Informação e Design.
-- Professores dos cursos de Sistemas de Informação, Engenharia Elétrica e Design.
+- Alunos de Sistemas de Informação.
+- Professores dos cursos de Sistemas de Informação e Engenharia Elétrica.
 
 ## Objetivos
 
