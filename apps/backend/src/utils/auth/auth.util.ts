@@ -1,8 +1,8 @@
 import { hash, compare } from 'bcryptjs';
 
-import { ENV } from '../env';
+import { ENV } from '../../env';
 
-export class Crypto {
+export class Auth {
   public static async hash(plain: string) {
     return hash(plain, ENV.SALT_ROUNDS);
   }

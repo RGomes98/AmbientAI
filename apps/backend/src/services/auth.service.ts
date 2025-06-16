@@ -1,7 +1,7 @@
 import { UserCreate } from '../domain/user/user.types';
 import { AuthenticationError, ConflictError, NotFoundError } from '../lib/error/http.error';
 import { UserRepository } from '../repositories/user.repository';
-import { Crypto } from '../utils/crypto.util';
+import { Auth } from '../utils/auth/auth.util';
 import { Session } from '../utils/session.util';
 
 export class AuthService {
@@ -16,7 +16,7 @@ export class AuthService {
 
     return await this.repository.create({
       email,
-      password: await Crypto.hash(password),
+      password: await Auth.hash(password),
     });
   }
 
@@ -27,7 +27,7 @@ export class AuthService {
       throw new AuthenticationError('Invalid email or password.');
     }
 
-    const isPasswordCorrect = await Crypto.compare(password, existingUser.password);
+    const isPasswordCorrect = await Auth.compare(password, existingUser.password);
 
     if (!isPasswordCorrect) {
       throw new AuthenticationError('Invalid email or password.');
