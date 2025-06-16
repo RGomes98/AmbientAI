@@ -1,7 +1,15 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
-  "globalEnv": ["PORT", "NODE_ENV", "REQUESTS_PER_MINUTE"],
+  "globalEnv": [
+    "PORT",
+    "NODE_ENV",
+    "REQUESTS_PER_MINUTE",
+    "POSTGRES_DATABASE_URL",
+    "POSTGRES_DATABASE_URL_NON_POOLING",
+    "JWT_SECRET",
+    "SALT_ROUNDS"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
