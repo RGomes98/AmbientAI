@@ -1,6 +1,5 @@
+import { Role } from '@prisma/client';
 import { z } from 'zod';
-
-import { Role } from '../../generated/prisma';
 
 const TokenSchema = z.object({
   access_token: z.string(),

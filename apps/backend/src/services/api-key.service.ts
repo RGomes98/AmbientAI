@@ -1,13 +1,13 @@
-import { ApiKeyFactory } from '../domain/api-key/api-key.factory';
 import { AuthenticationError } from '../lib/error/http.error';
 import { ApiKeyRepository } from '../repositories/api-key.repository';
+import { ApiKeyFactory } from '../domain/api-key/api-key.factory';
 import { Session } from '../utils/session.util';
 
 export class ApiKeyService {
   constructor(private repository: ApiKeyRepository) {}
 
   public async createSessionFromApiKey(plainKey: string) {
-    const hashedApiKey = ApiKeyFactory.hashKey(plainKey);
+    const hashedApiKey = ApiKeyFactory.hash(plainKey);
     const apiKeyRecord = await this.repository.findByHashedKey(hashedApiKey);
 
     if (!apiKeyRecord) {

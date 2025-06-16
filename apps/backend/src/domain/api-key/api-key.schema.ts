@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const API_KEY_PREFIX = 'ard_';
+import { API_KEY_PREFIX } from '../../constants/api-key.constant';
 
 const ApiKeySchema = z.string().startsWith(API_KEY_PREFIX, {
   message: "Invalid API Key format. Must start with 'ard_'.",

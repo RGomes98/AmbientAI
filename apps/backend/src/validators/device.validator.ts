@@ -1,16 +1,17 @@
-import { DeviceHeaderSchema } from '../domain/api-key/api-key.schema';
-import { ApiKeyGuard } from '../utils/api-key.util';
-import { AuthGuard } from '../utils/auth.util';
-import { Role } from '../generated/prisma';
+import { Role } from '@prisma/client';
 
-const deviceData = {
+import { DeviceHeaderSchema } from '../domain/api-key/api-key.schema';
+import { ApiKeyGuard } from '../utils/api-key/api-key.guard';
+import { AuthGuard } from '../utils/auth/auth.guard';
+
+const deviceValidator = {
   schema: {
     tags: ['Device'],
     description: 'Endpoint for devices to submit data.',
     consumes: ['application/json'],
     headers: DeviceHeaderSchema,
   },
-  onRequest: [ApiKeyGuard.authenticate, AuthGuard.requireRole([Role.DEVICE_WRITER])],
+  onRequest: [ApiKeyGuard.verify, AuthGuard.requireRole([Role.DEVICE_WRITER])],
 };
 
-export { deviceData };
+export { deviceValidator };

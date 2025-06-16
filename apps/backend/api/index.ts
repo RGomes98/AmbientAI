@@ -15,7 +15,7 @@ if (ENV.NODE_ENV === 'development') {
       await app.listen({ port: ENV.PORT });
       console.log(`Server listening at http://localhost:${ENV.PORT}`);
     } catch (error) {
-      console.error(error);
+      console.error(`Failed to start the development server:`, error);
       process.exit(1);
     }
   })();

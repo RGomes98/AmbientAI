@@ -1,8 +1,8 @@
 import { UserCreateSchema, UserLoginSchema, UserSchema } from '../domain/user/user.schema';
 import { TokenSchema } from '../domain/session/session.schema';
-import { AuthGuard } from '../utils/auth.util';
+import { AuthGuard } from '../utils/auth/auth.guard';
 
-const registerValidation = {
+const registerValidator = {
   schema: {
     tags: ['Auth'],
     description: 'Registers a new user account.',
@@ -12,7 +12,7 @@ const registerValidation = {
   },
 };
 
-const loginValidation = {
+const loginValidator = {
   schema: {
     tags: ['Auth'],
     description: 'Logs in an existing user and returns an access token.',
@@ -22,7 +22,7 @@ const loginValidation = {
   },
 };
 
-const meValidation = {
+const meValidator = {
   schema: {
     tags: ['Auth'],
     description: "Retrieves the authenticated user's account details.",
@@ -32,4 +32,4 @@ const meValidation = {
   onRequest: [AuthGuard.verify],
 };
 
-export { registerValidation, loginValidation, meValidation };
+export { registerValidator, loginValidator, meValidator };

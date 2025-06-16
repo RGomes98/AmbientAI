@@ -1,8 +1,8 @@
 import type { FastifyError, FastifyReply, FastifyRequest } from 'fastify';
 import { hasZodFastifySchemaValidationErrors } from 'fastify-type-provider-zod';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { ZodError } from 'zod';
 
-import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
 import { HttpException } from './http.error';
 
 export const handler = (error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
