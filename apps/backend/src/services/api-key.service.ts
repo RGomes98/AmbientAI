@@ -1,13 +1,13 @@
+import type { ApiKeyRepository } from '../repositories/api-key.repository';
+import { UserValueObject } from '../domain/user/user.value-object';
 import { AuthenticationError } from '../lib/error/http.error';
-import { ApiKeyRepository } from '../repositories/api-key.repository';
-import { ApiKeyFactory } from '../domain/api-key/api-key.factory';
-import { Session } from '../utils/session.util';
+import { Crypto } from '../utils/crypto.util';
 
 export class ApiKeyService {
   constructor(private repository: ApiKeyRepository) {}
 
   public async createSessionFromApiKey(plainKey: string) {
-    const hashedApiKey = ApiKeyFactory.hash(plainKey);
+    const hashedApiKey = Crypto.sha256Hash(plainKey);
     const apiKeyRecord = await this.repository.findByHashedKey(hashedApiKey);
 
     if (!apiKeyRecord) {
@@ -19,6 +19,6 @@ export class ApiKeyService {
       role: apiKeyRecord.user.role,
     };
 
-    return Session.validate(sessionPayload);
+    return UserValueObject.validateSession(sessionPayload);
   }
 }

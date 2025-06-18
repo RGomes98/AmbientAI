@@ -1,14 +1,13 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 
-import type { UserCreate, UserLogin } from '../domain/user/user.types';
-import { AuthService } from '../services/auth.service';
+import type { UserCreate, UserLogin } from '../domain/user/user.type';
+import type { AuthService } from '../services/auth.service';
 
 export class AuthController {
   constructor(private service: AuthService) {}
 
   public async register(request: FastifyRequest<{ Body: UserCreate }>, reply: FastifyReply) {
-    const { email, password } = request.body;
-    const user = await this.service.createUser({ email, password });
+    const user = await this.service.createUser(request.body);
     return reply.status(201).send(user);
   }
 
@@ -20,8 +19,7 @@ export class AuthController {
   }
 
   public async me(request: FastifyRequest, reply: FastifyReply) {
-    const { user } = request;
-    const existingUser = await this.service.getAuthenticatedUser(user);
+    const existingUser = await this.service.getAuthenticatedUser(request.user);
     return reply.status(200).send(existingUser);
   }
 }

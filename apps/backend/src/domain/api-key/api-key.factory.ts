@@ -1,23 +1,18 @@
-import { createHash, randomBytes } from 'crypto';
-
-import { API_KEY_PREFIX } from '../../constants/api-key.constant';
+import { API_KEY_PREFIX } from './api-key.const';
+import { Crypto } from '../../utils/crypto.util';
 
 export class ApiKeyFactory {
-  private static create() {
-    const randomPart = randomBytes(24).toString('hex');
-    return `${API_KEY_PREFIX}${randomPart}`;
+  private static build() {
+    const randomHex = Crypto.generateRandomHex();
+    return `${API_KEY_PREFIX}${randomHex}`;
   }
 
-  public static hash(plain: string) {
-    return createHash('sha256').update(plain).digest('hex');
-  }
-
-  public static generate() {
-    const plainKey = ApiKeyFactory.create();
+  public static create() {
+    const plainKey = ApiKeyFactory.build();
 
     return {
       plainKey,
-      hashedKey: ApiKeyFactory.hash(plainKey),
+      hashedKey: Crypto.sha256Hash(plainKey),
     };
   }
 }

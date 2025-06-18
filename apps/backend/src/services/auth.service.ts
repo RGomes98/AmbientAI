@@ -1,8 +1,8 @@
-import { UserCreate } from '../domain/user/user.types';
+import type { UserRepository } from '../repositories/user.repository';
+import type { UserCreate } from '../domain/user/user.type';
 import { AuthenticationError, ConflictError, NotFoundError } from '../lib/error/http.error';
-import { UserRepository } from '../repositories/user.repository';
-import { Auth } from '../utils/auth/auth.util';
-import { Session } from '../utils/session.util';
+import { UserValueObject } from '../domain/user/user.value-object';
+import { Crypto } from '../utils/crypto.util';
 
 export class AuthService {
   constructor(private repository: UserRepository) {}
@@ -16,7 +16,7 @@ export class AuthService {
 
     return await this.repository.create({
       email,
-      password: await Auth.hash(password),
+      password: await Crypto.hashWithSalt(password),
     });
   }
 
@@ -27,7 +27,7 @@ export class AuthService {
       throw new AuthenticationError('Invalid email or password.');
     }
 
-    const isPasswordCorrect = await Auth.compare(password, existingUser.password);
+    const isPasswordCorrect = await Crypto.compare(password, existingUser.password);
 
     if (!isPasswordCorrect) {
       throw new AuthenticationError('Invalid email or password.');
@@ -41,8 +41,8 @@ export class AuthService {
     return tokenPayload;
   }
 
-  public async getAuthenticatedUser(user: Session) {
-    const { userId } = Session.validate(user);
+  public async getAuthenticatedUser(user: unknown) {
+    const { userId } = UserValueObject.validateSession(user);
 
     const existingUser = await this.repository.findById(userId);
 

@@ -1,17 +1,17 @@
-import { join } from 'path';
 import { readFileSync } from 'fs';
+import { join } from 'path';
 
-import { Seed } from '../../src/utils/seed.util';
-import { AirQualitySchema } from '../../src/domain/air-quality/air-quality.schema';
-import { prisma } from '../../src/lib/database/prisma.database';
+import { AirQualityCreateSchema } from '../src/domain/air-quality/air-quality.schema';
+import { prisma } from '../src/lib/database/prisma.database';
+import { Seed } from '../src/utils/seed.util';
 
-async function main() {
+async function airQualityMeasurementSeed() {
   const filePath = join(process.cwd(), 'src', 'data', 'air_quality_data.json');
   const rawData = readFileSync(filePath, 'utf-8');
 
   const now = new Date();
   const startOfYear = new Date(now.getFullYear(), 0, 1);
-  const parsedData = AirQualitySchema.array().parse(JSON.parse(rawData));
+  const parsedData = AirQualityCreateSchema.array().parse(JSON.parse(rawData));
 
   const timestamps = Seed.generateUniqueTimestamps({
     count: parsedData.length,
@@ -25,7 +25,7 @@ async function main() {
 
 (async () => {
   try {
-    await main();
+    await airQualityMeasurementSeed();
     console.log('Seeding completed successfully!');
   } catch (error) {
     console.error('An error occurred during the seeding process:', error);

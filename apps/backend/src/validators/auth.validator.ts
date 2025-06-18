@@ -1,6 +1,8 @@
-import { UserCreateSchema, UserLoginSchema, UserSchema } from '../domain/user/user.schema';
-import { TokenSchema } from '../domain/session/session.schema';
-import { AuthGuard } from '../utils/auth/auth.guard';
+import { Role } from '@prisma/client';
+
+import { UserCreateSchema, UserLoginSchema, UserResponseSchema } from '../domain/user/user.schema';
+import { TokenSchema } from '../domain/token/token.schema';
+import { AuthGuard } from '../guards/auth.guard';
 
 const registerValidator = {
   schema: {
@@ -8,7 +10,7 @@ const registerValidator = {
     description: 'Registers a new user account.',
     consumes: ['application/json'],
     body: UserCreateSchema,
-    response: { 201: UserSchema.omit({ password: true }) },
+    response: { 201: UserResponseSchema },
   },
 };
 
@@ -27,9 +29,9 @@ const meValidator = {
     tags: ['Auth'],
     description: "Retrieves the authenticated user's account details.",
     security: [{ bearerAuth: [] }],
-    response: { 200: UserSchema.omit({ password: true }) },
+    response: { 200: UserResponseSchema },
   },
-  onRequest: [AuthGuard.verify],
+  onRequest: [AuthGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER, Role.VIEWER])],
 };
 
 export { registerValidator, loginValidator, meValidator };
