@@ -29,10 +29,6 @@ export const handler = (error: FastifyError, request: FastifyRequest, reply: Fas
     return reply.status(error.statusCode).send({ message: error.message });
   }
 
-  if (error instanceof Error) {
-    console.error(`[Unhandled Error] Unexpected error: ${error.code}`);
-    return reply.status(error.statusCode ?? 500).send({ message: error.message });
-  }
-
-  return reply.status(500).send({ message: 'An unknown error occurred.' });
+  console.error(`[Unhandled Error] Unexpected error: ${error.code}`);
+  return reply.status(error.statusCode ?? 500).send({ message: error.message });
 };

@@ -5,7 +5,7 @@ import { AuthenticationError, AuthorizationError } from '../lib/error/http.error
 import { UserValueObject } from '../domain/user/user.value-object';
 
 export class AuthGuard {
-  public static async verify(request: FastifyRequest, reply: FastifyReply) {
+  public static async verify(request: FastifyRequest) {
     try {
       await request.jwtVerify();
     } catch (error) {
