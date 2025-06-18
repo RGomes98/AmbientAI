@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
-export const AirQualitySchema = z.object({
-  temperature: z.number(),
+const AirQualitySchema = z.object({
+  id: z.string().cuid(),
+  timestamp: z.coerce.date(),
+  temperature: z.coerce.number(),
   humidity: z.number(),
   pm25: z.number(),
   pm10: z.number(),
@@ -12,3 +14,18 @@ export const AirQualitySchema = z.object({
   populationDensity: z.number().int(),
   airQuality: z.enum(['Good', 'Moderate', 'Poor', 'Hazardous']),
 });
+
+const AirQualityCreateSchema = AirQualitySchema.omit({
+  id: true,
+  timestamp: true,
+});
+
+const AirQualityQuerySchema = z.object({
+  startTimestamp: AirQualitySchema.shape.timestamp.optional(),
+  endTimestamp: AirQualitySchema.shape.timestamp.optional(),
+  minTemperature: AirQualitySchema.shape.temperature.nullable().catch(null),
+  maxTemperature: AirQualitySchema.shape.temperature.nullable().catch(null),
+  airQuality: AirQualitySchema.shape.airQuality.optional(),
+});
+
+export { AirQualitySchema, AirQualityCreateSchema, AirQualityQuerySchema };

@@ -1,3 +1,4 @@
+import { airQuality } from '../src/routes/air-quality.routes';
 import { base } from '../src/routes/base.routes';
 import { auth } from '../src/routes/auth.routes';
 
@@ -7,6 +8,7 @@ import { ENV } from '../src/env';
 // Routes
 app.register(base);
 app.register(auth);
+app.register(airQuality);
 
 // Development Server
 if (ENV.NODE_ENV === 'development') {
