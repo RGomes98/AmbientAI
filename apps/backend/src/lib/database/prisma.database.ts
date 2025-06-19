@@ -1,5 +1,6 @@
+import { PrismaClient } from '@prisma/client';
+
 import { ENV } from '../../env';
-import { PrismaClient } from '../../generated/prisma';
 
 declare global {
   var prisma: ReturnType<typeof prismaSingleton>;

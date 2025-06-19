@@ -1,13 +1,20 @@
 import { z } from 'zod';
 
-export const API_KEY_PREFIX = 'ard_';
+import { API_KEY_PREFIX } from './api-key.const';
 
-const ApiKeySchema = z.string().startsWith(API_KEY_PREFIX, {
+const ApiKeySchema = z.object({
+  id: z.string().cuid(),
+  hashedKey: z.string(),
+  userId: z.string().cuid(),
+  createdAt: z.coerce.date(),
+});
+
+const ApiKeyStructureSchema = z.string().startsWith(API_KEY_PREFIX, {
   message: "Invalid API Key format. Must start with 'ard_'.",
 });
 
-const DeviceHeaderSchema = z.object({
-  'x-api-key': ApiKeySchema,
+const ApiKeyHeadersSchema = z.object({
+  'x-api-key': ApiKeyStructureSchema,
 });
 
-export { ApiKeySchema, DeviceHeaderSchema };
+export { ApiKeySchema, ApiKeyStructureSchema, ApiKeyHeadersSchema };

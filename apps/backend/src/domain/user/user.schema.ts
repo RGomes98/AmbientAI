@@ -1,3 +1,4 @@
+import { Role } from '@prisma/client';
 import { z } from 'zod';
 
 const PasswordSchema = z
@@ -10,10 +11,11 @@ const PasswordSchema = z
 
 const UserSchema = z.object({
   id: z.string().cuid(),
-  updatedAt: z.coerce.date(),
-  createdAt: z.coerce.date(),
   email: z.string().email({ message: 'Please enter a valid email address.' }),
   password: PasswordSchema,
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+  role: z.nativeEnum(Role),
 });
 
 const UserCreateSchema = UserSchema.pick({
@@ -21,8 +23,16 @@ const UserCreateSchema = UserSchema.pick({
   password: true,
 });
 
+const UserResponseSchema = UserSchema.omit({
+  password: true,
+});
+
 const UserLoginSchema = UserSchema.pick({
   password: true,
 }).extend({ username: UserSchema.shape.email });
 
-export { UserSchema, UserCreateSchema, UserLoginSchema, PasswordSchema };
+const UserSessionSchema = UserSchema.pick({
+  role: true,
+}).extend({ userId: UserSchema.shape.id });
+
+export { UserSchema, UserCreateSchema, UserResponseSchema, UserLoginSchema, UserSessionSchema };

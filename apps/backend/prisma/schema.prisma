@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -37,4 +36,19 @@ model ApiKey {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+}
+
+model AirQualityMeasurement {
+  id                         String   @id @default(cuid())
+  timestamp                  DateTime @default(now())
+  temperature                Float
+  humidity                   Float
+  pm25                       Float
+  pm10                       Float
+  no2                        Float
+  so2                        Float
+  co                         Float
+  proximityToIndustrialAreas Float
+  populationDensity          Int
+  airQuality                 String
 }
