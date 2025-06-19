@@ -26,8 +26,6 @@ coverage
 out/
 build
 dist
-generated
-
 
 # Debug
 npm-debug.log*

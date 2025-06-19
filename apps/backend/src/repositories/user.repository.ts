@@ -1,5 +1,6 @@
-import type { UserCreate } from '../domain/user/user.types';
-import type { PrismaClient } from '../generated/prisma';
+import type { PrismaClient } from '@prisma/client';
+
+import type { UserCreate } from '../domain/user/user.type';
 
 export class UserRepository {
   constructor(private db: PrismaClient) {}

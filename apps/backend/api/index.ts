@@ -1,3 +1,4 @@
+import { airQuality } from '../src/routes/air-quality.routes';
 import { base } from '../src/routes/base.routes';
 import { auth } from '../src/routes/auth.routes';
 
@@ -7,6 +8,7 @@ import { ENV } from '../src/env';
 // Routes
 app.register(base);
 app.register(auth);
+app.register(airQuality);
 
 // Development Server
 if (ENV.NODE_ENV === 'development') {
@@ -15,7 +17,7 @@ if (ENV.NODE_ENV === 'development') {
       await app.listen({ port: ENV.PORT });
       console.log(`Server listening at http://localhost:${ENV.PORT}`);
     } catch (error) {
-      console.error(error);
+      console.error('Failed to start the development server:', error);
       process.exit(1);
     }
   })();

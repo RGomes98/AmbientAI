@@ -2,9 +2,9 @@ import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { validatorCompiler, serializerCompiler } from 'fastify-type-provider-zod';
 import { fastify } from 'fastify';
 
-import { core } from '../plugins/core.plugin';
-import { swagger } from '../plugins/swagger.plugin';
 import { authentication } from '../plugins/authentication.plugin';
+import { swagger } from '../plugins/swagger.plugin';
+import { core } from '../plugins/core.plugin';
 
 import { handler } from '../lib/error/handler.error';
 

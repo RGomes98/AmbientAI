@@ -41,6 +41,19 @@ O planejamento prevê:
 - Implementação do protótipo em uma escola local como piloto de Educação Ambiental.
 - Análise dos resultados e produção de artigo científico baseado nos dados obtidos.
 
+## Fonte de Dados
+
+Atualmente, os dados utilizados neste projeto são provenientes do seguinte conjunto de dados público disponibilizado no Kaggle:
+
+> Mujtaba Mateen. (2024). _Air Quality and Pollution Assessment_ \[Data set]. Kaggle. [https://doi.org/10.34740/KAGGLE/DS/6197184](https://doi.org/10.34740/KAGGLE/DS/6197184)
+
+**Nota:** Os dados originais foram modificados para melhor atender aos requisitos deste projeto. As alterações incluíram:
+
+- Conversão para formato JSON
+- Mudança nos nomes das chaves (keys)
+
+Esta é uma fonte de dados **temporária**. Em futuras versões do projeto, os dados serão substituídos por medições reais provenientes de sensores conectados a um Arduino.
+
 ## Links
 
 - **Link do site**: [AmbientAI](https://ambient-ai-frontend.vercel.app/)

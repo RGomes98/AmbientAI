@@ -13,7 +13,7 @@ This will download the project and move you into its root directory.
 
 ### Configure environment variables
 
-AmbientAI uses several environment variables to configure the backend server. These should be defined in a `.env.local` file located in the `apps/backend` directory.
+AmbientAI uses several environment variables to configure the backend server. These should be defined in a `.env` file located in the `apps/backend` directory.
 
 1. Navigate to the `apps/backend` folder:
 
@@ -26,16 +26,16 @@ cd apps/backend
 **Linux/macOS:**
 
 ```bash
-cp .env.example .env.local
+cp .env.example .env
 ```
 
 **Windows (Command Prompt):**
 
 ```cmd
-copy .env.example .env.local
+copy .env.example .env
 ```
 
-3. Open `.env.local` and modify the values as needed.
+3. Open `.env` and modify the values as needed.
 
 ### Install dependencies
 

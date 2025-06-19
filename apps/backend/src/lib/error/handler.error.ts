@@ -1,8 +1,8 @@
 import type { FastifyError, FastifyReply, FastifyRequest } from 'fastify';
 import { hasZodFastifySchemaValidationErrors } from 'fastify-type-provider-zod';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { ZodError } from 'zod';
 
-import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
 import { HttpException } from './http.error';
 
 export const handler = (error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
@@ -29,10 +29,6 @@ export const handler = (error: FastifyError, request: FastifyRequest, reply: Fas
     return reply.status(error.statusCode).send({ message: error.message });
   }
 
-  if (error instanceof Error) {
-    console.error(`[Unhandled Error] Unexpected error: ${error.code}`);
-    return reply.status(error.statusCode ?? 500).send({ message: error.message });
-  }
-
-  return reply.status(500).send({ message: 'An unknown error occurred.' });
+  console.error(`[Unhandled Error] Unexpected error: ${error.name}`);
+  return reply.status(error.statusCode ?? 500).send({ message: error.message });
 };

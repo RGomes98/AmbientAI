@@ -1,8 +1,8 @@
-import { UserCreate } from '../domain/user/user.types';
+import type { UserRepository } from '../repositories/user.repository';
+import type { UserCreate } from '../domain/user/user.type';
 import { AuthenticationError, ConflictError, NotFoundError } from '../lib/error/http.error';
-import { UserRepository } from '../repositories/user.repository';
+import { UserValueObject } from '../domain/user/user.value-object';
 import { Crypto } from '../utils/crypto.util';
-import { Session } from '../utils/session.util';
 
 export class AuthService {
   constructor(private repository: UserRepository) {}
@@ -16,7 +16,7 @@ export class AuthService {
 
     return await this.repository.create({
       email,
-      password: await Crypto.hash(password),
+      password: await Crypto.hashWithSalt(password),
     });
   }
 
@@ -41,8 +41,8 @@ export class AuthService {
     return tokenPayload;
   }
 
-  public async getAuthenticatedUser(user: Session) {
-    const { userId } = Session.validate(user);
+  public async getAuthenticatedUser(user: unknown) {
+    const { userId } = UserValueObject.validateSession(user);
 
     const existingUser = await this.repository.findById(userId);
 

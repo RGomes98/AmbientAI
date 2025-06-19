@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0]
+
+### Added
+
+- Air Quality module:
+
+  - Added routes, controllers, services, repositories, validators, and domain logic for Air Quality.
+  - Introduced a helper class to dynamically build queries related to air quality measurements.
+  - Added new Prisma model/table `AirQualityMeasurement` for storing air quality data.
+  - Created a database seeder class with helper functions to populate the database with mock air quality data.
+
+### Changed
+
+- Project structure:
+
+  - Major refactor across domain folders.
+  - Improved folder organization, variable naming conventions, and overall code structure.
+  - Introduced new helper functions, schemas, types, and validators for better modularity.
+
+- Configuration:
+
+  - Updated Turborepo variables in `turbo.json`.
+  - Updated `.gitignore` entries.
+
+- Documentation:
+
+  - Updated README with the latest instructions and project information.
+
+### Fixed
+
+- Error handling:
+
+  - Fixed conditional response logic in the global error handler.
+
+### Maintenance
+
+- Minor code improvements for readability and maintainability.
+
 ## [2.0.0]
 
 ### Added
