@@ -16,7 +16,7 @@ export class Crypto {
     return randomBytes(bytes).toString('hex');
   }
 
-  public static sha256Hash(plain: string): string {
+  public static sha256Hash(plain: string) {
     return createHash('sha256').update(plain).digest('hex');
   }
 }

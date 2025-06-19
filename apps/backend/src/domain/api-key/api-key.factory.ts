@@ -8,7 +8,7 @@ export class ApiKeyFactory {
   }
 
   public static create() {
-    const plainKey = ApiKeyFactory.build();
+    const plainKey = this.build();
 
     return {
       plainKey,

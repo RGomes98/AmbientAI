@@ -29,6 +29,6 @@ export const handler = (error: FastifyError, request: FastifyRequest, reply: Fas
     return reply.status(error.statusCode).send({ message: error.message });
   }
 
-  console.error(`[Unhandled Error] Unexpected error: ${error.code}`);
+  console.error(`[Unhandled Error] Unexpected error: ${error.name}`);
   return reply.status(error.statusCode ?? 500).send({ message: error.message });
 };

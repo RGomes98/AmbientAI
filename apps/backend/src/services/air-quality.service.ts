@@ -1,5 +1,5 @@
-import type { AirQualityCreate, AirQualityQuery } from '../domain/air-quality/air-quality.type';
 import type { AirQualityRepository } from '../repositories/air-quality.repository';
+import type { AirQualityCreate } from '../domain/air-quality/air-quality.type';
 import { AirQualityQueryBuilder } from '../domain/air-quality/air-quality-query.builder';
 import { AirQualityValueObject } from '../domain/air-quality/air-quality.value-object';
 
