@@ -8,11 +8,9 @@ type TimestampGenerationOptions = {
   to?: Date;
 };
 
-type ModelName = keyof {
-  [Model in keyof PrismaClient as PrismaClient[Model] extends { createMany: Function }
-    ? Model
-    : never]: boolean;
-};
+type ModelName = {
+  [Model in keyof PrismaClient]: PrismaClient[Model] extends { createMany: Function } ? Model : never;
+}[keyof PrismaClient];
 
 type CreateManyData<T extends ModelName> =
   Prisma.Args<PrismaClient[T], 'createMany'> extends { data: infer D } ? D : never;
