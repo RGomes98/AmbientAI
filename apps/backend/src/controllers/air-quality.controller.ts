@@ -19,4 +19,9 @@ export class AirQualityController {
     const data = await this.service.getAllAirQualityEntries(request.query);
     return reply.status(200).send(data);
   }
+
+  public async getLatest(_request: FastifyRequest, reply: FastifyReply) {
+    const data = await this.service.getLatestAirQualityEntry();
+    return reply.status(200).send(data);
+  }
 }

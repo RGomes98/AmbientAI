@@ -26,12 +26,12 @@ async function airQualityMeasurementSeed() {
 (async () => {
   try {
     await airQualityMeasurementSeed();
-    console.log('Seeding completed successfully!');
+    console.info('Seeding completed successfully!');
   } catch (error) {
     console.error('An error occurred during the seeding process:', error);
     process.exit(1);
   } finally {
     await prisma.$disconnect();
-    console.log('Prisma client disconnected.');
+    console.info('Prisma client disconnected.');
   }
 })();
