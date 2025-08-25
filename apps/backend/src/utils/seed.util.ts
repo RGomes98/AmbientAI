@@ -49,7 +49,7 @@ export class Seed {
 
     try {
       const result = await (model as any).createMany({ data });
-      console.log(`Created ${result.count} new records in ${modelName}.`);
+      console.info(`Created ${result.count} new records in ${modelName}.`);
     } catch (error) {
       console.error(`Error creating records in ${modelName}.`);
       throw error;
