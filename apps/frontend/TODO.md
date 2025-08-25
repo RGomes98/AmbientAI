@@ -20,4 +20,4 @@
 
 # Database Schema (new fields, update...)
 
-# Arduino Code (payload failure, ip address, loop, restart...)
+# Arduino Code (payload failure, ip address, loop, restart, mac address...)
