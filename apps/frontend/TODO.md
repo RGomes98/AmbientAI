@@ -15,3 +15,9 @@
 # Dark Mode?
 
 # AQI Calc
+
+# NGINX, Docker, Build script... (Digital Ocean Droplet)
+
+# Database Schema (new fields, update...)
+
+# Arduino Code (payload failure, ip address, loop, restart...)
