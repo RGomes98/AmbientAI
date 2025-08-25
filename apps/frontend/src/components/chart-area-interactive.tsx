@@ -28,16 +28,16 @@ const timeRangeDescriptions: { [key: string]: { long: string; short: string } } 
 };
 
 export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
-  if (!data.length) {
-    return null; //Adicinar Empty State
-  }
-
   const searchParams = useSearchParams();
   const initialRange = z.enum(['1d', '7d', '14d']).catch('7d').parse(searchParams.get('range'));
 
   const [timeRange, setTimeRange] = useState<string>(initialRange);
   const isMobile = useIsMobile();
   const router = useRouter();
+
+  if (!data.length) {
+    return null; //Adicinar Empty State
+  }
 
   const currentDescription = timeRangeDescriptions[timeRange];
 
@@ -143,8 +143,9 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
               content={
                 <ChartTooltipContent
                   indicator='dashed'
-                  labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString('pt-BR', {
+                  labelFormatter={(_title, content) => {
+                    const { payload } = content[0];
+                    return new Date(payload?.timestamp).toLocaleDateString('pt-BR', {
                       month: 'long',
                       day: 'numeric',
                       hour: '2-digit',
