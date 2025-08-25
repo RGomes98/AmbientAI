@@ -23,6 +23,16 @@ const createValidator = {
   onRequest: [ApiKeyGuard.verify, AuthGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER])],
 };
 
+const getLatestValidator = {
+  schema: {
+    tags: ['Air Quality'],
+    description: 'Endpoint to retrieve the latest air quality data.',
+    security: [{ bearerAuth: [] }],
+    response: { 200: AirQualitySchema },
+  },
+  onRequest: [AuthGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER, Role.VIEWER])],
+};
+
 const getAllFilteredValidator = {
   schema: {
     tags: ['Air Quality'],
@@ -34,4 +44,4 @@ const getAllFilteredValidator = {
   onRequest: [AuthGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER, Role.VIEWER])],
 };
 
-export { createValidator, getAllFilteredValidator };
+export { createValidator, getLatestValidator, getAllFilteredValidator };
