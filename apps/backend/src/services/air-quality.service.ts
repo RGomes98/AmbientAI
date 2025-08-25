@@ -18,6 +18,6 @@ export class AirQualityService {
     const query = AirQualityValueObject.validateQuery(queryString);
     const filterBuilder = new AirQualityQueryBuilder(query);
     const whereClause = filterBuilder.build();
-    return await this.repository.findManyFiltered(whereClause);
+    return await this.repository.findManyFiltered(whereClause, query.take);
   }
 }

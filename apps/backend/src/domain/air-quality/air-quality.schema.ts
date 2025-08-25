@@ -21,7 +21,7 @@ const AirQualityCreateSchema = AirQualitySchema.omit({
 });
 
 const AirQualityQuerySchema = z.object({
-  take: z.number().int().min(1).max(200).optional(),
+  take: z.coerce.number().int().min(1).max(200).optional(),
   startTimestamp: AirQualitySchema.shape.timestamp.optional(),
   endTimestamp: AirQualitySchema.shape.timestamp.optional(),
   minTemperature: AirQualitySchema.shape.temperature.nullable().catch(null),

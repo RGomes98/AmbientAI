@@ -25,8 +25,13 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
 
   const end = now.toISOString();
   const start = startDate.toISOString();
-  const chartData = await getFilteredAirQuality({ startTimestamp: start, endTimestamp: end });
+
   const latestData = await getLatestAirQuality();
+  const chartData = await getFilteredAirQuality({
+    take: String(200),
+    startTimestamp: start,
+    endTimestamp: end,
+  });
 
   return (
     <SidebarProvider
