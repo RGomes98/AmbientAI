@@ -1,10 +1,9 @@
-import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 import { ENV } from '@/env';
 
-export async function GET(_request: NextRequest) {
+export async function GET() {
   try {
     const url = new URL(`${ENV.SERVER_URL}/auth/login`);
 
