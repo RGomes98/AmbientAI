@@ -10,9 +10,8 @@ export class AirQualityRepository {
 
   public async findManyFiltered(whereClause: Prisma.AirQualityMeasurementWhereInput) {
     return await this.db.airQualityMeasurement.findMany({
-      take: 200,
       where: whereClause,
-      orderBy: { timestamp: 'desc' },
+      orderBy: { timestamp: 'asc' },
     });
   }
 }
