@@ -1,4 +1,4 @@
-# Loading Skeletons
+# Loading Skeletons.
 
 # Finish Dashboard Cards
 
