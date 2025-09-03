@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0]
+
+### Added
+
+- New endpoint to retrieve the latest air quality data.
+- Added `take` query parameter to control the number of data entries returned by the API.
+
+### Changed
+
+- Adjusted the order of returned air quality data based on timestamp for accurate chronological display.
+- Minor improvements to API logging for better debugging and monitoring.
+
 ## [3.0.0]
 
 ### Added
