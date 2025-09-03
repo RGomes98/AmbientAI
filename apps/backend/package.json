@@ -9,7 +9,7 @@
     "prisma:reset": "npx prisma migrate reset",
     "prisma:studio": "npx prisma studio",
     "prisma:seed": "tsx --env-file .env prisma/prisma.seed.ts",
-    "start": "node --env-file .env dist/api/index.js",
+    "start": "node dist/api/index.js",
     "dev": "tsx watch --env-file .env api/index.ts",
     "build": "npx tsc"
   },
