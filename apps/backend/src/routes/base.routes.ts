@@ -5,10 +5,7 @@ import { VersionSchema } from '../lib/schemas/generic.schema';
 import { File } from '../utils/file.util';
 import { ENV } from '../env';
 
-const version =
-  ENV.NODE_ENV === 'production'
-    ? ENV.VERSION
-    : File.readContent('vercel.json', VersionSchema, (json) => json.env.VERSION);
+const version = ENV.NODE_ENV === 'production' ? ENV.VERSION : File.readContent('VERSION', VersionSchema);
 
 const html = `
 <!DOCTYPE html>

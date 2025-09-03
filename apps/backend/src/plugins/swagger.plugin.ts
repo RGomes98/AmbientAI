@@ -11,7 +11,7 @@ import { ENV } from '../env';
 const plugin = async (instance: FastifyInstance) => {
   if (ENV.NODE_ENV === 'production') return;
 
-  const version = File.readContent('vercel.json', StringSchema, (json) => json.env.VERSION);
+  const version = File.readContent('VERSION', StringSchema);
   const changelog = File.readContent('CHANGELOG.md', StringSchema)?.split('\n').slice(6).join('\n');
 
   instance.register(fastifySwagger, {
