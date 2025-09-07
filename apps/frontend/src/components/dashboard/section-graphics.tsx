@@ -2,7 +2,7 @@
 
 import { AirQuality } from '@/lib/schemas/air-quality.schema';
 import { GaugeChart } from './gauge-chart';
-import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
 export function SectionGraphics({ latestEntry }: { latestEntry: AirQuality | null }) {
   if (!latestEntry) {

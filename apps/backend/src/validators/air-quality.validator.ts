@@ -28,7 +28,7 @@ const getLatestValidator = {
     tags: ['Air Quality'],
     description: 'Endpoint to retrieve the latest air quality data.',
     security: [{ bearerAuth: [] }],
-    response: { 200: AirQualitySchema },
+    response: { 200: AirQualitySchema.nullable() },
   },
   onRequest: [AuthGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER, Role.VIEWER])],
 };

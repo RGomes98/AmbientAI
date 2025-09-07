@@ -2,7 +2,6 @@
 
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 
-import { useIsMobile } from '@/hooks/use-mobile';
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -13,6 +12,7 @@ import { calculateAqi } from '@/utils/air-quality.util';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Query } from '@/utils/query.util';
 import z from 'zod';
+import { useMobile } from '@/hooks/shared/useMobile.hook';
 
 const chartConfig = {
   value: {
@@ -32,7 +32,7 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
   const initialRange = z.enum(['1d', '7d', '14d']).catch('7d').parse(searchParams.get('range'));
 
   const [timeRange, setTimeRange] = useState<string>(initialRange);
-  const isMobile = useIsMobile();
+  const isMobile = useMobile();
   const router = useRouter();
 
   if (!data.length) {

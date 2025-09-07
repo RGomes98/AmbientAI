@@ -1,16 +1,14 @@
-import { Sidebar } from '@/components/sidebar';
-import { ChartAreaInteractive } from '@/components/chart-area-interactive';
-import { SectionCards } from '@/components/section-cards';
-import { DashboardHeader } from '@/components/dashboard-header';
+import { Sidebar } from '@/components/shared/sidebar';
+import { ChartAreaInteractive } from '@/components/dashboard/chart-area-interactive';
+import { SectionCards } from '@/components/dashboard/section-cards';
+import { DashboardHeader } from '@/components/dashboard/dashboard-header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { getFilteredAirQuality, getLatestAirQuality } from '@/services/air-quality.service';
-import { SectionGraphics } from '@/components/section-graphics';
+import { SectionGraphics } from '@/components/dashboard/section-graphics';
 
 import z from 'zod';
 
-type DashboardProps = {
-  searchParams: Promise<{ range?: string }>;
-};
+type DashboardProps = { searchParams: Promise<{ range?: string }> };
 
 const QUERY_RANGES = ['1d', '7d', '14d'] as const;
 

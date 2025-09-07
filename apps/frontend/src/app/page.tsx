@@ -1,13 +1,39 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Earth } from 'lucide-react';
+import { LoginForm } from '@/components/login/Form';
 
-export default function Login() {
-  useEffect(() => {
-    (async () => {
-      await fetch('api/session/login');
-    })();
-  }, []);
+import Image from 'next/image';
+import Link from 'next/link';
 
-  return <h1>Login</h1>;
+export default function LoginPage() {
+  return (
+    <div className='grid min-h-svh lg:grid-cols-2'>
+      <div className='flex flex-col gap-4 p-6 md:p-10'>
+        <div className='flex justify-center gap-2 md:justify-start'>
+          <Link href='/' className='flex items-center gap-2 font-medium'>
+            <div className='bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md'>
+              <Earth className='size-4' />
+            </div>
+            AmbientAI
+          </Link>
+        </div>
+        <div className='flex flex-1 items-center justify-center'>
+          <div className='w-full max-w-xs'>
+            <LoginForm />
+          </div>
+        </div>
+      </div>
+      <div className='bg-muted relative hidden lg:block'>
+        <Image
+          quality={100}
+          width={2048}
+          height={2048}
+          src='/logo.png'
+          alt='logo-ambientai'
+          className='absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale'
+        />
+      </div>
+    </div>
+  );
 }
