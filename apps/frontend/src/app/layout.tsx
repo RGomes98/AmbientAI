@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Poppins, Roboto } from 'next/font/google';
+import { ThemeProvider } from '@/providers/theme.provider';
 import { Toaster } from '@/components/ui/sonner';
 
 import '@/stylesheets/globals.css';
@@ -22,10 +23,12 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang='pt-BR'>
+    <html lang='pt-BR' suppressHydrationWarning>
       <body className={`${poppins.className} ${roboto.variable} antialiased`}>
-        {children}
-        <Toaster richColors position='top-right' theme='light' />
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+          {children}
+          <Toaster richColors position='top-right' theme='light' />
+        </ThemeProvider>
       </body>
     </html>
   );
