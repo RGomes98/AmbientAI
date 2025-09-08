@@ -2,7 +2,7 @@ import { ChartAreaInteractive } from '@/components/dashboard/chart-area-interact
 import { DashboardHeader } from '@/components/dashboard/dashboard-header';
 import { SectionCards } from '@/components/dashboard/section-cards';
 import { SectionGraphics } from '@/components/dashboard/section-graphics';
-import { Sidebar } from '@/components/Shared/sidebar';
+import { Sidebar } from '@/components/shared/sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { getFilteredAirQuality, getLatestAirQuality } from '@/services/air-quality.service';
 
