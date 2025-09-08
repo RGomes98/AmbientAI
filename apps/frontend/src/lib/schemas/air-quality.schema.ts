@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const AirQualitySchema = z.object({
   id: z.cuid(),
-  timestamp: z.coerce.date(),
+  timestamp: z.string(),
   temperature: z.coerce.number(),
   humidity: z.number(),
   pm25: z.number(),
