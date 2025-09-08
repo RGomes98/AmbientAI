@@ -28,7 +28,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'form'>)
           <Input id='password' name='password' type='password' placeholder='********' required />
         </div>
         <Button disabled={isLoading} type='submit' className='w-full cursor-pointer'>
-          {isLoading ? <LoaderCircle className='h-5 w-5 animate-spin text-white' /> : 'Entrar'}
+          {isLoading ? <LoaderCircle className='h-5 w-5 animate-spin' /> : 'Entrar'}
         </Button>
       </div>
     </form>
