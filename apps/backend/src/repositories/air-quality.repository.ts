@@ -10,7 +10,7 @@ export class AirQualityRepository {
   }
 
   public async findLatest() {
-    return await this.db.airQualityMeasurement.findFirst();
+    return await this.db.airQualityMeasurement.findFirst({ orderBy: { timestamp: 'desc' } });
   }
 
   public async findManyFiltered(whereClause: Prisma.AirQualityMeasurementWhereInput, take?: number) {

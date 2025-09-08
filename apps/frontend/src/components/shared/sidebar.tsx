@@ -1,6 +1,7 @@
 'use client';
 
-import { IconInnerShadowTop } from '@tabler/icons-react';
+import { Earth } from 'lucide-react';
+import { ThemeToggler } from './theme-toggler';
 import { SidebarUser } from './sidebar-user';
 
 import {
@@ -22,15 +23,17 @@ export function Sidebar({ ...props }: React.ComponentProps<typeof SidebarRoot>) 
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild className='data-[slot=sidebar-menu-button]:!p-1.5'>
-              <Link href='/'>
-                <IconInnerShadowTop className='!size-5' />
+              <Link href='/dashboard'>
+                <Earth className='!size-5' />
                 <span className='text-base font-semibold'>AmbientAI</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent></SidebarContent>
+      <SidebarContent>
+        <ThemeToggler />
+      </SidebarContent>
       <SidebarFooter>
         <SidebarUser />
       </SidebarFooter>

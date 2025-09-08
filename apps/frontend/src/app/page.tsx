@@ -1,7 +1,7 @@
 'use client';
 
-import { Earth } from 'lucide-react';
 import { LoginForm } from '@/components/login/Form';
+import { Earth } from 'lucide-react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -31,7 +31,7 @@ export default function LoginPage() {
           height={2048}
           src='/logo.png'
           alt='logo-ambientai'
-          className='absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale'
+          className='absolute inset-0 h-full w-full object-cover'
         />
       </div>
     </div>

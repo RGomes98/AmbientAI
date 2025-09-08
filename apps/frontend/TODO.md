@@ -1,23 +1,13 @@
-# Loading Skeletons
-
 # Finish Dashboard Cards
 
-# Empty State for Graphs
-
-# Sidebar Info and Buttons
-
-# Logout
-
-# Responsiveness
-
-# Gauge Chart Layout Improvements
-
-# Dark Mode?
+# Database Schema (new fields, update...)
 
 # AQI Calc
 
-# NGINX, Docker, Build script... (Digital Ocean Droplet)
+# Login QRCode
 
-# Database Schema (new fields, update...)
+# Organize code (frontend)
+
+# NGINX, Docker, Build script... (Digital Ocean Droplet)
 
 # Arduino Code (payload failure, ip address, loop, restart, mac address...)

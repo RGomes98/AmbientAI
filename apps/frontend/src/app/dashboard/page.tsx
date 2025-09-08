@@ -1,10 +1,10 @@
-import { Sidebar } from '@/components/shared/sidebar';
 import { ChartAreaInteractive } from '@/components/dashboard/chart-area-interactive';
-import { SectionCards } from '@/components/dashboard/section-cards';
 import { DashboardHeader } from '@/components/dashboard/dashboard-header';
+import { SectionCards } from '@/components/dashboard/section-cards';
+import { SectionGraphics } from '@/components/dashboard/section-graphics';
+import { Sidebar } from '@/components/Shared/sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { getFilteredAirQuality, getLatestAirQuality } from '@/services/air-quality.service';
-import { SectionGraphics } from '@/components/dashboard/section-graphics';
 
 import z from 'zod';
 
@@ -42,7 +42,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
     >
       <Sidebar variant='inset' />
       <SidebarInset>
-        <DashboardHeader />
+        <DashboardHeader latestEntry={latestData} />
         <div className='flex flex-1 flex-col'>
           <div className='@container/main flex flex-1 flex-col gap-2'>
             <div className='grid grid-rows-[auto_auto_auto] gap-4 py-4 md:gap-4 md:py-4'>
