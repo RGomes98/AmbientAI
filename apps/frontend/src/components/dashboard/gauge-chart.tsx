@@ -1,5 +1,5 @@
-import { RadialBarChart, RadialBar, PolarAngleAxis, Text } from 'recharts';
-import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from './ui/chart';
+import { RadialBarChart, RadialBar, PolarAngleAxis } from 'recharts';
+import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '../ui/chart';
 
 type GaugeChartProps = {
   value: number;
@@ -78,8 +78,8 @@ export function GaugeChart({
         </RadialBarChart>
       </ChartContainer>
       <div className='absolute top-[55%] left-[50%] z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col gap-0.5 text-center'>
-        <Text className='text-foreground font-poppins text-[1.35rem] font-semibold'>{`${value.toFixed(1)}${units}`}</Text>
-        <Text className='text-foreground font-roboto text-[0.85rem]'>{description}</Text>
+        <span className='text-foreground font-poppins text-[1.35rem] font-semibold'>{`${value.toFixed(1)}${units}`}</span>
+        <span className='text-foreground font-roboto text-[0.85rem]'>{description}</span>
       </div>
       <div className='font-poppins text-foreground absolute bottom-12 flex w-full items-center justify-around gap-22 text-sm font-semibold'>
         <span>{minValue}</span>

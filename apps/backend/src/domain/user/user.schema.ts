@@ -27,9 +27,10 @@ const UserResponseSchema = UserSchema.omit({
   password: true,
 });
 
-const UserLoginSchema = UserSchema.pick({
-  password: true,
-}).extend({ username: UserSchema.shape.email });
+const UserLoginSchema = z.object({
+  username: z.string(),
+  password: z.string(),
+});
 
 const UserSessionSchema = UserSchema.pick({
   role: true,

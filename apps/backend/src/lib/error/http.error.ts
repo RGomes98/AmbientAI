@@ -10,37 +10,37 @@ class HttpException extends Error {
 }
 
 class BadRequestError extends HttpException {
-  constructor(message = 'Invalid request data.') {
+  constructor(message = 'Dados da requisição inválidos.') {
     super(message, 400);
   }
 }
 
 class AuthenticationError extends HttpException {
-  constructor(message = 'Authentication failed.') {
+  constructor(message = 'Falha na autenticação.') {
     super(message, 401);
   }
 }
 
 class AuthorizationError extends HttpException {
-  constructor(message = 'You are not authorized to access this resource.') {
+  constructor(message = 'Você não tem permissão para acessar este recurso.') {
     super(message, 403);
   }
 }
 
 class NotFoundError extends HttpException {
-  constructor(message = 'Resource not found.') {
+  constructor(message = 'Recurso não encontrado.') {
     super(message, 404);
   }
 }
 
 class ConflictError extends HttpException {
-  constructor(message = 'Resource conflict.') {
+  constructor(message = 'Conflito de recurso.') {
     super(message, 409);
   }
 }
 
 class ValidationError extends HttpException {
-  constructor(message = 'Validation failed.') {
+  constructor(message = 'Falha na validação dos dados.') {
     super(message, 422);
   }
 }
