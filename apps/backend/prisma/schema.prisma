@@ -39,16 +39,19 @@ model ApiKey {
 }
 
 model AirQualityMeasurement {
-  id                         String   @id @default(cuid())
-  timestamp                  DateTime @default(now())
-  temperature                Float
-  humidity                   Float
-  pm25                       Float
-  pm10                       Float
-  no2                        Float
-  so2                        Float
-  co                         Float
-  proximityToIndustrialAreas Float
-  populationDensity          Int
-  airQuality                 String
+  id              String   @id @default(cuid())
+  timestamp       DateTime @default(now())
+  co2             Int
+  tvocIndex       Int
+  tvocRaw         Int
+  noxIndex        Int
+  noxRaw          Int
+  pm01            Int
+  pm02            Int
+  pm10            Int
+  pm003Count      Int
+  temperature     Float
+  tempCompensated Float
+  humidity        Int
+  humCompensated  Int
 }

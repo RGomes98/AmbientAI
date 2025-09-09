@@ -18,8 +18,16 @@ export function SectionGraphics({ latestEntry }: { latestEntry: AirQuality | nul
       </CardHeader>
       <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-items-center gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6'>
         <GaugeChart
-          value={latestEntry?.pm25}
-          maxValue={55}
+          value={latestEntry?.pm01}
+          maxValue={150}
+          label='PM₀.₁'
+          description='Partículas Ultrafinas'
+          units='µg/m³'
+          color='#0ea5e9'
+        />
+        <GaugeChart
+          value={latestEntry?.pm02}
+          maxValue={150}
           label='PM₂.₅'
           description='Partículas Finas'
           units='µg/m³'
@@ -27,35 +35,35 @@ export function SectionGraphics({ latestEntry }: { latestEntry: AirQuality | nul
         />
         <GaugeChart
           value={latestEntry?.pm10}
-          maxValue={155}
+          maxValue={300}
           label='PM₁₀'
           description='Partículas Grossas'
           units='µg/m³'
           color='#eab308'
         />
         <GaugeChart
-          value={latestEntry?.no2}
-          maxValue={360}
-          label='NO₂'
-          description='Dióxido de Nitrogênio'
-          units='ppb'
-          color='#ef4444'
-        />
-        <GaugeChart
-          value={latestEntry?.so2}
-          maxValue={185}
-          label='SO₂'
-          description='Dióxido de Enxofre'
-          units='ppb'
-          color='#d946ef'
-        />
-        <GaugeChart
-          value={latestEntry?.co}
-          maxValue={12.4}
-          label='CO'
-          description='Monóxido de Carbono'
+          value={latestEntry?.co2}
+          maxValue={2000}
+          label='CO₂'
+          description='Dióxido de Carbono'
           units='ppm'
-          color='#64748b'
+          color='#22c55e'
+        />
+        <GaugeChart
+          value={latestEntry?.tvocIndex}
+          maxValue={1000}
+          label='TVOC'
+          description='Índice de Compostos Voláteis'
+          units=' Índice'
+          color='#a855f7'
+        />
+        <GaugeChart
+          value={latestEntry?.noxIndex}
+          maxValue={10}
+          label='NOx'
+          description='Índice de Óxidos de Nitrogênio'
+          units=' Índice'
+          color='#ef4444'
         />
       </div>
     </Card>
