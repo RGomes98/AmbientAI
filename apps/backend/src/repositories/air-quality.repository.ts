@@ -17,7 +17,28 @@ export class AirQualityRepository {
     return await this.db.airQualityMeasurement.findMany({
       take,
       where: whereClause,
-      orderBy: { timestamp: 'asc' },
+      orderBy: { timestamp: 'desc' },
+    });
+  }
+
+  public async getWeeklyAverages(startDate: Date, endDate: Date) {
+    return this.db.airQualityMeasurement.aggregate({
+      where: { timestamp: { gte: startDate, lte: endDate } },
+      _avg: {
+        temperature: true,
+        tempCompensated: true,
+        humidity: true,
+        humCompensated: true,
+        pm01: true,
+        pm02: true,
+        pm10: true,
+        pm003Count: true,
+        co2: true,
+        tvocIndex: true,
+        tvocRaw: true,
+        noxIndex: true,
+        noxRaw: true,
+      },
     });
   }
 }
