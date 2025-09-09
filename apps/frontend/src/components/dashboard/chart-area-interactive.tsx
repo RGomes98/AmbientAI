@@ -1,19 +1,19 @@
 'use client';
 
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { BarChart2 } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { useState } from 'react';
 import { AirQuality } from '@/lib/schemas/air-quality.schema';
 import { calculateAqi } from '@/utils/air-quality.util';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { Query } from '@/utils/query.util';
-import z from 'zod';
 import { useMobile } from '@/hooks/shared/useMobile.hook';
-import { BarChart2 } from 'lucide-react';
+import { DayRangeQueryParamSchema } from '@/lib/schemas/query.schema';
 
 const chartConfig = {
   value: {
@@ -30,18 +30,16 @@ const timeRangeDescriptions: { [key: string]: { long: string; short: string } } 
 
 export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
   const searchParams = useSearchParams();
-  const initialRange = z.enum(['1d', '7d', '14d']).catch('7d').parse(searchParams.get('range'));
+  const initialRange = DayRangeQueryParamSchema.parse(searchParams.get('range'));
 
   const [timeRange, setTimeRange] = useState<string>(initialRange);
   const isMobile = useMobile();
   const router = useRouter();
 
   const currentDescription = timeRangeDescriptions[timeRange];
-
-  const chartData = data.map(({ co, no2, pm10, pm25, so2, timestamp }) => ({
-    value: calculateAqi({ co, no2, pm10, pm25, so2 }).aqi,
-    timestamp,
-  }));
+  const chartData = data
+    .toReversed()
+    .map((data) => ({ value: calculateAqi(data).aqi, timestamp: data.timestamp }));
 
   function handleChangeTimeRange(range: string) {
     if (typeof window === 'undefined') return;

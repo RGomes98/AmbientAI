@@ -21,7 +21,6 @@ export function DashboardHeader({ latestEntry }: { latestEntry: AirQuality | nul
       <div className='flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6'>
         <SidebarTrigger className='-ml-1 cursor-pointer' />
         <Separator orientation='vertical' className='mx-2 data-[orientation=vertical]:h-4' />
-        <h1 className='text-base font-medium max-sm:hidden'>AmbientAI</h1>
         <div className='ml-auto flex items-center gap-2'>
           <span className='text-base font-medium max-sm:hidden'>Monitoramento Ambiental</span>
           {formatted ? (
