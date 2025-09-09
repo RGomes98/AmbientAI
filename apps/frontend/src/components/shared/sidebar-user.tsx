@@ -1,20 +1,19 @@
 'use client';
 
 import { IconDotsVertical, IconLogout } from '@tabler/icons-react';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
+import { Avatar } from '@/components/ui/avatar';
 import { UserCircle } from 'lucide-react';
-
 import { useSession } from '@/providers/session.provider';
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+
+import Link from 'next/link';
 
 export function SidebarUser() {
   const { isMobile } = useSidebar();
@@ -27,10 +26,10 @@ export function SidebarUser() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size='lg'
-              className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
+              className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground cursor-pointer'
             >
-              <Avatar className='h-8 w-8 rounded-lg grayscale'>
-                <AvatarFallback className='rounded-lg'>CN</AvatarFallback>
+              <Avatar className='flex size-8 items-center justify-center rounded-lg'>
+                <UserCircle />
               </Avatar>
               <div className='grid flex-1 text-left text-sm leading-tight'>
                 <span className='truncate font-medium'>{email.split('@')[0]}</span>
@@ -40,26 +39,20 @@ export function SidebarUser() {
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className='w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg'
+            className='w-fit rounded-lg'
             side={isMobile ? 'bottom' : 'right'}
             align='end'
             sideOffset={4}
           >
-            <DropdownMenuLabel className='p-0 font-normal'>
-              <div className='flex items-center gap-2 px-1 py-1.5 text-left text-sm'>
-                <Avatar className='h-8 w-8 rounded-lg'>
-                  <UserCircle />
-                </Avatar>
-                <div className='grid flex-1 text-left text-sm leading-tight'>
-                  <span className='truncate font-medium'>{email.split('@')[0]}</span>
-                  <span className='text-muted-foreground truncate text-xs'>{email}</span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <IconLogout />
-              Log out
+            <DropdownMenuItem className='p-0'>
+              <Link
+                href='api/session/logout'
+                className='flex h-full w-full items-center gap-2 py-1.5 pr-4 pl-2'
+                prefetch={false}
+              >
+                <IconLogout />
+                Encerrar sessão
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -6,7 +6,7 @@ import { prisma } from '../src/lib/database/prisma.database';
 import { Seed } from '../src/utils/seed.util';
 
 async function airQualityMeasurementSeed() {
-  const filePath = join(process.cwd(), 'src', 'data', 'air_quality_data.json');
+  const filePath = join(process.cwd(), 'src', 'data', 'mock_air_quality.json');
   const rawData = readFileSync(filePath, 'utf-8');
 
   const now = new Date();

@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.0]
+
+### Added
+
+- New mock dataset with real Arduino payload structure for more realistic testing and development.
+
+### Changed
+
+- Air Quality module:
+  - Updated `AirQualityMeasurement` database model to reflect real fields from Arduino payload.
+  - Renamed endpoints, services, controllers, and validators for clarity and consistency.
+  - Added endpoint, service, controller, and validator for weekly air quality averages.
+
+- Authentication:
+  - Improved error message handling for login-related responses, providing clearer feedback to frontend clients.
+
+- Configuration:
+  - Reorganized `.env` schema structure for better readability and maintainability.
+  - Updated how the API version is retrieved for consistent access across the project.
+
+### Fixed
+
+- Air Quality endpoints:
+  - Corrected validation of `GET /air-quality/latest` response in case of null database values.
+  - Ensured proper chronological ordering of entries for `GET /air-quality/latest`.
+
 ## [4.0.0]
 
 ### Added
@@ -22,7 +48,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Air Quality module:
-
   - Added routes, controllers, services, repositories, validators, and domain logic for Air Quality.
   - Introduced a helper class to dynamically build queries related to air quality measurements.
   - Added new Prisma model/table `AirQualityMeasurement` for storing air quality data.
@@ -31,24 +56,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Project structure:
-
   - Major refactor across domain folders.
   - Improved folder organization, variable naming conventions, and overall code structure.
   - Introduced new helper functions, schemas, types, and validators for better modularity.
 
 - Configuration:
-
   - Updated Turborepo variables in `turbo.json`.
   - Updated `.gitignore` entries.
 
 - Documentation:
-
   - Updated README with the latest instructions and project information.
 
 ### Fixed
 
 - Error handling:
-
   - Fixed conditional response logic in the global error handler.
 
 ### Maintenance
@@ -60,51 +81,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - API Keys system:
-
   - Introduced API key hashing, validation, and storage mechanism.
   - Implemented `ApiKeyGuard` for API key-based authentication.
   - Defined API key format validation (`ard_` prefix) using Zod schemas.
 
 - Authentication module:
-
   - Added user authentication flow including controllers, services, repositories, domains, routes, plugins, utils, and validators.
   - Introduced role validation for authenticated sessions.
 
 - Error handling:
-
   - Implemented a global error handler for consistent error responses.
   - Added support for custom HTTP exceptions.
 
 - Database:
-
   - Updated the Prisma database schema to support authentication and roles.
 
   - Added initial Prisma setup for PostgreSQL:
-
     - Created `schema.prisma` with datasource and generator configurations.
     - Added environment variables `POSTGRES_DATABASE_URL` and `POSTGRES_DATABASE_URL_NON_POOLING`.
     - Introduced `prisma` singleton instance for database access (`src/lib/database/prisma.database.ts`).
 
   - Environment configuration:
-
     - Extended `.env.example` documentation with new variables required for authentication.
     - Extended environment schema validation (`EnvSchema`) to include new database environment variables.
 
 ### Changed
 
 - Refactored project structure:
-
   - Removed legacy route decorators.
   - Improved plugin naming conventions for better clarity and maintainability.
   - Improved overall app folder organization to follow domain-driven patterns.
 
 - Improved Zod schema structures:
-
   - Modularized and cleaned up existing schemas.
   - Enhanced validation error messages for better API client feedback.
 
 - Routing:
-
   - Removed example routes.
 
 ## [1.0.0]

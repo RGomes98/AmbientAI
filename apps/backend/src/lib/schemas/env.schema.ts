@@ -1,23 +1,11 @@
 import { z } from 'zod';
 
-import {
-  JwtSecretSchema,
-  NodeEnvSchema,
-  PortSchema,
-  PostgresDatabaseUrlNonPoolingSchema,
-  PostgresDatabaseUrlSchema,
-  RequestsPerMinuteSchema,
-  SaltRoundsSchema,
-  VersionSchema,
-} from './generic.schema';
-
 export const EnvSchema = z.object({
-  VERSION: VersionSchema.nullable().catch(null),
-  PORT: PortSchema,
-  NODE_ENV: NodeEnvSchema,
-  REQUESTS_PER_MINUTE: RequestsPerMinuteSchema,
-  POSTGRES_DATABASE_URL: PostgresDatabaseUrlSchema,
-  POSTGRES_DATABASE_URL_NON_POOLING: PostgresDatabaseUrlNonPoolingSchema,
-  JWT_SECRET: JwtSecretSchema,
-  SALT_ROUNDS: SaltRoundsSchema,
+  PORT: z.coerce.number().int().positive(),
+  NODE_ENV: z.enum(['production', 'development', 'test']),
+  REQUESTS_PER_MINUTE: z.coerce.number().int().positive(),
+  POSTGRES_DATABASE_URL: z.coerce.string().url(),
+  POSTGRES_DATABASE_URL_NON_POOLING: z.coerce.string().url(),
+  JWT_SECRET: z.coerce.string().base64(),
+  SALT_ROUNDS: z.coerce.number().int().positive(),
 });

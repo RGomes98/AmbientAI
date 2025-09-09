@@ -1,14 +1,10 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
+import { z } from 'zod';
 
 import type { FastifyTypedInstance } from '../config/app.config';
-import { VersionSchema } from '../lib/schemas/generic.schema';
 import { File } from '../utils/file.util';
-import { ENV } from '../env';
 
-const version =
-  ENV.NODE_ENV === 'production'
-    ? ENV.VERSION
-    : File.readContent('vercel.json', VersionSchema, (json) => json.env.VERSION);
+const version = File.readContent('VERSION', z.string());
 
 const html = `
 <!DOCTYPE html>
