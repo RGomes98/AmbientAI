@@ -10,7 +10,7 @@ const authService = new AuthService(userRepository);
 const authController = new AuthController(authService);
 
 export const auth = async (instance: FastifyTypedInstance) => {
-  instance.post('/auth/register', registerValidator, authController.register.bind(authController));
+  // instance.post('/auth/register', registerValidator, authController.register.bind(authController));
   instance.post('/auth/login', loginValidator, authController.login.bind(authController));
   instance.get('/auth/me', meValidator, authController.me.bind(authController));
 };
