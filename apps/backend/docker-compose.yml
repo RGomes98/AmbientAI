@@ -5,7 +5,7 @@ volumes:
 
 services:
   api:
-    build: .
+    image: rgomes98/ambientai-api:latest
     container_name: api
     restart: always
     depends_on:

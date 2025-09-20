@@ -5,13 +5,19 @@
   "main": "api/index.ts",
   "scripts": {
     "prisma:generate": "npx prisma generate",
-    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:migrate:dev": "npx prisma migrate dev",
+    "prisma:migrate:prod": "npx prisma migrate deploy",
     "prisma:reset": "npx prisma migrate reset",
     "prisma:studio": "npx prisma studio",
-    "prisma:seed": "tsx --env-file .env prisma/prisma.seed.ts",
-    "start": "node dist/api/index.js",
+    "prisma:air-quality-seed:dev": "tsx --env-file .env src/lib/database/seeds/air-quality.seed.ts",
+    "prisma:admin-seed:dev": "tsx --env-file .env src/lib/database/seeds/admin.seed.ts",
+    "prisma:device-writer-seed:dev": "tsx --env-file .env src/lib/database/seeds/device-writer.seed.ts",
+    "prisma:air-quality-seed:prod": "node dist/src/lib/database/seeds/air-quality.seed.js",
+    "prisma:admin-seed:prod": "node dist/src/lib/database/seeds/admin.seed.js",
+    "prisma:device-writer-seed:prod": "node dist/src/lib/database/seeds/device-writer.seed.js",
     "dev": "tsx watch --env-file .env api/index.ts",
-    "build": "npx tsc"
+    "start": "node dist/api/index.js",
+    "build": "npx tsc && cp -r src/data dist/src/data"
   },
   "keywords": [],
   "author": "",
