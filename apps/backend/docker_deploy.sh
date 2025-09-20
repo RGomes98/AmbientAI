@@ -59,7 +59,7 @@ cleanup_on_interrupt() {
 }
 
 # Catch Ctrl+C or termination signals
-trap cleanup_on_interrupt SIGINT SIGTERM ERR
+trap cleanup_on_interrupt SIGINT SIGTERM
 
 # Options menu
 DEPLOY_EXISTS=false
