@@ -10,7 +10,7 @@ const plugin = async (instance: FastifyInstance) => {
   instance.register(fastifyFormbody);
 
   instance.register(fastifyCors, {
-    origin: '*',
+    origin: ENV.FRONTEND_URL,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   });
 
