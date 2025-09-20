@@ -1,5 +1,5 @@
 import { ENV } from '@/env';
-import { AirQualitySchema } from '@/lib/schemas/air-quality.schema';
+import { AirQualitySchema, AirQualityWeeklyComparisonSchema } from '@/lib/schemas/air-quality.schema';
 import { Query } from '@/utils/query.util';
 import { Session } from '@/utils/session.util';
 
@@ -11,7 +11,7 @@ export async function getLatestAirQuality() {
       throw new Error('Unauthorized.');
     }
 
-    const response = await fetch(new URL(`${ENV.SERVER_URL}/air-quality/get-latest`), {
+    const response = await fetch(new URL(`${ENV.SERVER_URL}/air-quality/latest`), {
       method: 'GET',
       headers: { Authorization: Session.generateAuthorizationHeaders(token) },
     });
@@ -39,7 +39,7 @@ export async function getFilteredAirQuality(query: Record<string, string>) {
     const url = Query.mutateParamsToURL({
       params: query,
       type: 'append',
-      url: `${ENV.SERVER_URL}/air-quality/get-all-filtered`,
+      url: `${ENV.SERVER_URL}/air-quality/filtered`,
     });
 
     if (!url) {
@@ -60,5 +60,30 @@ export async function getFilteredAirQuality(query: Record<string, string>) {
   } catch (error) {
     console.error(error);
     return [];
+  }
+}
+
+export async function getWeeklyAverages() {
+  try {
+    const token = await Session.getAuthorizationToken('access_token');
+
+    if (!token) {
+      throw new Error('Unauthorized.');
+    }
+
+    const response = await fetch(new URL(`${ENV.SERVER_URL}/air-quality/average`), {
+      method: 'GET',
+      headers: { Authorization: Session.generateAuthorizationHeaders(token) },
+    });
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(`Failed to fetch air quality weekly average: ${message}`);
+    }
+
+    return AirQualityWeeklyComparisonSchema.parse(await response.json());
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 }

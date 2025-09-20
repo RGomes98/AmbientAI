@@ -1,18 +1,19 @@
 'use client';
 
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { BarChart2 } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
-import { useIsMobile } from '@/hooks/use-mobile';
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { useState } from 'react';
 import { AirQuality } from '@/lib/schemas/air-quality.schema';
 import { calculateAqi } from '@/utils/air-quality.util';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { Query } from '@/utils/query.util';
-import z from 'zod';
+import { useMobile } from '@/hooks/shared/useMobile.hook';
+import { DayRangeQueryParamSchema } from '@/lib/schemas/query.schema';
 
 const chartConfig = {
   value: {
@@ -29,22 +30,16 @@ const timeRangeDescriptions: { [key: string]: { long: string; short: string } } 
 
 export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
   const searchParams = useSearchParams();
-  const initialRange = z.enum(['1d', '7d', '14d']).catch('7d').parse(searchParams.get('range'));
+  const initialRange = DayRangeQueryParamSchema.parse(searchParams.get('range'));
 
   const [timeRange, setTimeRange] = useState<string>(initialRange);
-  const isMobile = useIsMobile();
+  const isMobile = useMobile();
   const router = useRouter();
 
-  if (!data.length) {
-    return null; //Adicinar Empty State
-  }
-
   const currentDescription = timeRangeDescriptions[timeRange];
-
-  const chartData = data.map(({ co, no2, pm10, pm25, so2, timestamp }) => ({
-    value: calculateAqi({ co, no2, pm10, pm25, so2 }).aqi,
-    timestamp,
-  }));
+  const chartData = data
+    .toReversed()
+    .map((data) => ({ value: calculateAqi(data).aqi, timestamp: data.timestamp }));
 
   function handleChangeTimeRange(range: string) {
     if (typeof window === 'undefined') return;
@@ -63,7 +58,8 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
   return (
     <Card className='@container/card mx-4 lg:mx-4'>
       <CardHeader>
-        <CardTitle>Índice de Qualidade do Ar (AQI)</CardTitle>
+        <CardTitle className='hidden @[540px]/card:block'>Índice de Qualidade do Ar (AQI)</CardTitle>
+        <CardTitle className='@[540px]/card:hidden'>Índice de Qualidade</CardTitle>
         <CardDescription>
           <span className='hidden @[540px]/card:block'>{currentDescription.long}</span>
           <span className='@[540px]/card:hidden'>{currentDescription.short}</span>
@@ -117,53 +113,64 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
       </CardHeader>
       <CardContent className='px-2 pt-4 sm:px-6 sm:pt-6'>
         <ChartContainer config={chartConfig} className='aspect-auto h-[250px] w-full'>
-          <AreaChart data={chartData}>
-            <defs>
-              <linearGradient id='fillValue' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='20%' stopColor='var(--color-aqi-warning)' stopOpacity={0.8} />
-                <stop offset='95%' stopColor='var(--color-aqi-ok)' stopOpacity={0.6} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid vertical={false} strokeDasharray='3 3' />
-            <XAxis
-              dataKey='timestamp'
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              minTickGap={32}
-              tickFormatter={(value) => {
-                const date = new Date(value);
-                return date.toLocaleDateString('pt-BR', { month: 'short', day: 'numeric' });
-              }}
-            />
-            <YAxis tickLine={false} axisLine={false} tickMargin={8} width={30} />
-            <ChartTooltip
-              cursor={false}
-              defaultIndex={isMobile ? -1 : 10}
-              content={
-                <ChartTooltipContent
-                  indicator='dashed'
-                  labelFormatter={(_title, content) => {
-                    const { payload } = content[0];
-                    return new Date(payload?.timestamp).toLocaleDateString('pt-BR', {
-                      month: 'long',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    });
-                  }}
-                />
-              }
-            />
-            <Area
-              stackId={1}
-              dataKey='value'
-              type='stepBefore'
-              fill='url(#fillValue)'
-              stroke='url(#fillValue)'
-              activeDot={{ fill: 'transparent' }}
-            />
-          </AreaChart>
+          {chartData.length === 0 ? (
+            <div className='text-muted-foreground flex flex-col items-center justify-center gap-3 pt-3 pb-12 text-center'>
+              <BarChart2 className='text-muted-foreground/70 h-12 w-12' />
+              <h3 className='text-lg font-semibold'>Nenhum dado disponível</h3>
+              <p className='text-muted-foreground max-w-sm text-sm'>
+                Não encontramos registros para o período selecionado. Tente ajustar os filtros ou escolher
+                outro intervalo de tempo.
+              </p>
+            </div>
+          ) : (
+            <AreaChart data={chartData}>
+              <defs>
+                <linearGradient id='fillValue' x1='0' y1='0' x2='0' y2='1'>
+                  <stop offset='20%' stopColor='var(--color-aqi-warning)' stopOpacity={0.8} />
+                  <stop offset='95%' stopColor='var(--color-aqi-ok)' stopOpacity={0.6} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid vertical={false} strokeDasharray='3 3' />
+              <XAxis
+                dataKey='timestamp'
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                minTickGap={32}
+                tickFormatter={(value) => {
+                  const date = new Date(value);
+                  return date.toLocaleDateString('pt-BR', { month: 'short', day: 'numeric' });
+                }}
+              />
+              <YAxis tickLine={false} axisLine={false} tickMargin={8} width={30} />
+              <ChartTooltip
+                cursor={false}
+                defaultIndex={isMobile ? -1 : 10}
+                content={
+                  <ChartTooltipContent
+                    indicator='dashed'
+                    labelFormatter={(_title, content) => {
+                      const { payload } = content[0];
+                      return new Date(payload?.timestamp).toLocaleDateString('pt-BR', {
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      });
+                    }}
+                  />
+                }
+              />
+              <Area
+                stackId={1}
+                dataKey='value'
+                type='stepBefore'
+                fill='url(#fillValue)'
+                stroke='url(#fillValue)'
+                activeDot={{ fill: 'transparent' }}
+              />
+            </AreaChart>
+          )}
         </ChartContainer>
       </CardContent>
     </Card>

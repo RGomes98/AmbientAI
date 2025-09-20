@@ -6,14 +6,6 @@ export class AirQualityQueryBuilder {
   private where: Prisma.AirQualityMeasurementWhereInput = {};
   constructor(private query: AirQualityQuery) {}
 
-  private filterByAirQuality() {
-    const { airQuality } = this.query;
-
-    if (airQuality) {
-      this.where.airQuality = airQuality;
-    }
-  }
-
   private filterByTemperature() {
     const { minTemperature, maxTemperature } = this.query;
 
@@ -49,7 +41,6 @@ export class AirQualityQueryBuilder {
   public build() {
     this.filterByTimestamp();
     this.filterByTemperature();
-    this.filterByAirQuality();
     return this.where;
   }
 }

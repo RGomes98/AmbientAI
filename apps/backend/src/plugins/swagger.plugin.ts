@@ -3,16 +3,16 @@ import { fastifySwagger } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
 import { jsonSchemaTransform } from 'fastify-type-provider-zod';
 import { fastifyPlugin } from 'fastify-plugin';
+import { z } from 'zod';
 
-import { StringSchema } from '../lib/schemas/generic.schema';
 import { File } from '../utils/file.util';
 import { ENV } from '../env';
 
 const plugin = async (instance: FastifyInstance) => {
   if (ENV.NODE_ENV === 'production') return;
 
-  const version = File.readContent('VERSION', StringSchema);
-  const changelog = File.readContent('CHANGELOG.md', StringSchema)?.split('\n').slice(6).join('\n');
+  const version = File.readContent('VERSION', z.string());
+  const changelog = File.readContent('CHANGELOG.md', z.string())?.split('\n').slice(6).join('\n');
 
   instance.register(fastifySwagger, {
     transform: jsonSchemaTransform,

@@ -8,6 +8,7 @@ import {
   AirQualitySchema,
   AirQualityCreateSchema,
   AirQualityQuerySchema,
+  AirQualityWeeklyComparisonSchema,
 } from '../domain/air-quality/air-quality.schema';
 
 const createValidator = {
@@ -23,20 +24,20 @@ const createValidator = {
   onRequest: [ApiKeyGuard.verify, AuthGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER])],
 };
 
-const getLatestValidator = {
+const latestValidator = {
   schema: {
     tags: ['Air Quality'],
     description: 'Endpoint to retrieve the latest air quality data.',
     security: [{ bearerAuth: [] }],
-    response: { 200: AirQualitySchema },
+    response: { 200: AirQualitySchema.nullable() },
   },
   onRequest: [AuthGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER, Role.VIEWER])],
 };
 
-const getAllFilteredValidator = {
+const filteredValidator = {
   schema: {
     tags: ['Air Quality'],
-    description: 'Endpoint to retrieve air quality data.',
+    description: 'Endpoint to retrieve filtered air quality data.',
     security: [{ bearerAuth: [] }],
     querystring: AirQualityQuerySchema,
     response: { 200: AirQualitySchema.array() },
@@ -44,4 +45,14 @@ const getAllFilteredValidator = {
   onRequest: [AuthGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER, Role.VIEWER])],
 };
 
-export { createValidator, getLatestValidator, getAllFilteredValidator };
+const averageValidator = {
+  schema: {
+    tags: ['Air Quality'],
+    description: 'Endpoint to retrieve air quality data averages.',
+    security: [{ bearerAuth: [] }],
+    response: { 200: AirQualityWeeklyComparisonSchema },
+  },
+  onRequest: [AuthGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER, Role.VIEWER])],
+};
+
+export { createValidator, latestValidator, filteredValidator, averageValidator };

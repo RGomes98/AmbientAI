@@ -1,4 +1,4 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
+import type { FastifyRequest } from 'fastify';
 import type { Role } from '@prisma/client';
 
 import { AuthenticationError, AuthorizationError } from '../lib/error/http.error';

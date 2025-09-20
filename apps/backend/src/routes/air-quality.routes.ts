@@ -7,8 +7,9 @@ import { prisma } from '../lib/database/prisma.database';
 
 import {
   createValidator,
-  getLatestValidator,
-  getAllFilteredValidator,
+  latestValidator,
+  filteredValidator,
+  averageValidator,
 } from '../validators/air-quality.validator';
 
 const airQualityRepository = new AirQualityRepository(prisma);
@@ -22,13 +23,18 @@ export const airQuality = async (instance: FastifyTypedInstance) => {
     airQualityController.create.bind(airQualityController)
   );
   instance.get(
-    '/air-quality/get-latest',
-    getLatestValidator,
-    airQualityController.getLatest.bind(airQualityController)
+    '/air-quality/latest',
+    latestValidator,
+    airQualityController.latest.bind(airQualityController)
   );
   instance.get(
-    '/air-quality/get-all-filtered',
-    getAllFilteredValidator,
-    airQualityController.getAllFiltered.bind(airQualityController)
+    '/air-quality/filtered',
+    filteredValidator,
+    airQualityController.filtered.bind(airQualityController)
+  );
+  instance.get(
+    '/air-quality/average',
+    averageValidator,
+    airQualityController.average.bind(airQualityController)
   );
 };
