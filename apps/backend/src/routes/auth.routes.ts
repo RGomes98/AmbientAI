@@ -1,5 +1,5 @@
 import type { FastifyTypedInstance } from '../config/app.config';
-import { meValidator, loginValidator, registerValidator } from '../validators/auth.validator';
+import { meValidator, loginValidator } from '../validators/auth.validator';
 import { UserRepository } from '../repositories/user.repository';
 import { AuthController } from '../controllers/auth.controller';
 import { AuthService } from '../services/auth.service';

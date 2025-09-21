@@ -1,4 +1,4 @@
-import { ApiKeySchema, ApiKeyStructureSchema, ApiKeyHeadersSchema } from './api-key.schema';
+import { ApiKeySchema, ApiKeyStructureSchema } from './api-key.schema';
 
 export class ApiKeyValueObject {
   public static validate(key: unknown) {

@@ -6,7 +6,7 @@ import { Seed } from '../../../utils/seed.util';
 import { prisma } from '../prisma.database';
 
 async function seed() {
-  console.log('🌱 Starting the air quality data seeding process...');
+  console.info('🌱 Starting the air quality data seeding process...');
 
   const isProd = __dirname.includes('dist');
   const basePath = isProd ? join(process.cwd(), 'dist') : process.cwd();

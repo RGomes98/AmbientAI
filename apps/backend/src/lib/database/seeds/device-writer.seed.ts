@@ -6,7 +6,7 @@ import { prisma } from '../prisma.database';
 import { UserValueObject } from '../../../domain/user/user.value-object';
 
 async function seed() {
-  console.log('🌱 Starting the device writer seeding process...');
+  console.info('🌱 Starting the device writer seeding process...');
 
   const email = UserValueObject.validateEmail(process.env.DEVICE_EMAIL);
   const password = UserValueObject.validatePassword(process.env.DEVICE_PASSWORD);
@@ -28,9 +28,9 @@ async function seed() {
     },
   });
 
-  console.log(`✅ Device writer successfully created!`);
-  console.log(`Username: ${email}`);
-  console.log(`API Key (use on the device): ${plainKey}`);
+  console.info(`✅ Device writer successfully created!`);
+  console.info(`Username: ${email}`);
+  console.info(`API Key (use on the device): ${plainKey}`);
 }
 
 (async () => {

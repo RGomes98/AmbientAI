@@ -5,7 +5,7 @@ import { Crypto } from '../../../utils/crypto.util';
 import { prisma } from '../prisma.database';
 
 async function seed() {
-  console.log('🌱 Starting the admin user seeding process...');
+  console.info('🌱 Starting the admin user seeding process...');
 
   const email = UserValueObject.validateEmail(process.env.ADMIN_EMAIL);
   const password = UserValueObject.validatePassword(process.env.ADMIN_PASSWORD);
@@ -18,7 +18,7 @@ async function seed() {
     },
   });
 
-  console.log(`✅ Admin user successfully created! ${admin.email}`);
+  console.info(`✅ Admin user successfully created! ${admin.email}`);
 }
 
 (async () => {
