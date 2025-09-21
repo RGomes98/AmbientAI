@@ -15,13 +15,12 @@ const createValidator = {
   schema: {
     tags: ['Air Quality'],
     description: 'Endpoint to submit air quality data.',
-    security: [{ bearerAuth: [] }],
     consumes: ['application/json'],
     headers: ApiKeyHeadersSchema,
     body: AirQualityCreateSchema.array(),
     response: { 201: AirQualitySchema.array() },
   },
-  onRequest: [ApiKeyGuard.verify, AuthGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER])],
+  onRequest: [ApiKeyGuard.verify, AuthGuard.requireRole([Role.ADMIN, Role.DEVICE_WRITER])],
 };
 
 const latestValidator = {

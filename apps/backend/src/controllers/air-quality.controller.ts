@@ -1,12 +1,13 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 
 import type { AirQualityService } from '../services/air-quality.service';
+import { AirQualityValueObject } from '../domain/air-quality/air-quality.value-object';
 
 export class AirQualityController {
   constructor(private service: AirQualityService) {}
 
   public async create(request: FastifyRequest, reply: FastifyReply) {
-    const data = await this.service.createAirQualityEntries(request.body);
+    const data = await this.service.createAirQualityEntries(AirQualityValueObject.validate(request.body));
     return reply.status(201).send(data);
   }
 

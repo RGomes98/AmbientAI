@@ -1,0 +1,8 @@
+# ignore local dependencies to avoid copying them into the image
+node_modules
+
+# ignore local environment file for security
+.env
+
+# ignore build output
+dist

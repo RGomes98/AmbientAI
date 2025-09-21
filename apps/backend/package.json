@@ -1,15 +1,23 @@
 {
   "name": "backend",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "",
   "main": "api/index.ts",
   "scripts": {
     "prisma:generate": "npx prisma generate",
-    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:migrate:dev": "npx prisma migrate dev",
+    "prisma:migrate:prod": "npx prisma migrate deploy",
     "prisma:reset": "npx prisma migrate reset",
     "prisma:studio": "npx prisma studio",
-    "prisma:seed": "tsx --env-file .env prisma/prisma.seed.ts",
-    "dev": "tsx watch --env-file .env api/index.ts"
+    "prisma:air-quality-seed:dev": "tsx --env-file .env src/lib/database/seeds/air-quality.seed.ts",
+    "prisma:admin-seed:dev": "tsx --env-file .env src/lib/database/seeds/admin.seed.ts",
+    "prisma:device-writer-seed:dev": "tsx --env-file .env src/lib/database/seeds/device-writer.seed.ts",
+    "prisma:air-quality-seed:prod": "node dist/src/lib/database/seeds/air-quality.seed.js",
+    "prisma:admin-seed:prod": "node dist/src/lib/database/seeds/admin.seed.js",
+    "prisma:device-writer-seed:prod": "node dist/src/lib/database/seeds/device-writer.seed.js",
+    "dev": "tsx watch --env-file .env api/index.ts",
+    "start": "node dist/api/index.js",
+    "build": "npx tsc && cp -r src/data dist/src/data"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +42,6 @@
     "@types/node": "^22.15.3",
     "prisma": "^6.7.0",
     "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   }
 }

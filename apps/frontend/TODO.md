@@ -4,6 +4,6 @@
 
 # Organize code (frontend)
 
-# NGINX, Docker, Build script... (Digital Ocean Droplet)
+# Simbolo qualidade do ar - ou +
 
 # Arduino Code (payload failure, loop, restart...)

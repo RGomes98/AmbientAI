@@ -111,8 +111,8 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
           </Select>
         </CardAction>
       </CardHeader>
-      <CardContent className='px-2 pt-4 sm:px-6 sm:pt-6'>
-        <ChartContainer config={chartConfig} className='aspect-auto h-[250px] w-full'>
+      <CardContent className='h-full px-2 pt-4 sm:px-6 sm:pt-6'>
+        <ChartContainer config={chartConfig} className='aspect-auto h-full w-full'>
           {chartData.length === 0 ? (
             <div className='text-muted-foreground flex flex-col items-center justify-center gap-3 pt-3 pb-12 text-center'>
               <BarChart2 className='text-muted-foreground/70 h-12 w-12' />

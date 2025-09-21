@@ -26,13 +26,15 @@ export class AirQualityService {
 
   public async getWeeklyComparison() {
     const today = new Date();
+
     const startOfThisWeek = subDays(today, 7);
+    const endOfThisWeek = today;
 
     const startOfLastWeek = subDays(today, 14);
     const endOfLastWeek = subDays(today, 7);
 
+    const thisWeekAvgPromise = this.repository.getWeeklyAverages(startOfThisWeek, endOfThisWeek);
     const lastWeekAvgPromise = this.repository.getWeeklyAverages(startOfLastWeek, endOfLastWeek);
-    const thisWeekAvgPromise = this.repository.getWeeklyAverages(startOfThisWeek, today);
 
     const [lastWeekAvg, thisWeekAvg] = await Promise.all([lastWeekAvgPromise, thisWeekAvgPromise]);
     return { lastWeekAvg: lastWeekAvg._avg, thisWeekAvg: thisWeekAvg._avg };
