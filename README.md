@@ -56,5 +56,5 @@ Esta é uma fonte de dados **temporária**. Em futuras versões do projeto, os d
 
 ## Links
 
-- **Link do site**: [AmbientAI](https://ambient-ai-frontend.vercel.app/)
-- **Link da API**: [AmbientAI API](https://ambient-ai-backend.vercel.app/)
+- **Link da API**: [AmbientAI API](https://ambientai-api.lat/)
+- **Link do site**: [AmbientAI Frontend](https://ambient-ai-frontend.vercel.app/)
