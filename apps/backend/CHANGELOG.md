@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.0.0]
+
+### Added
+
+- New environment variables for deployment (database and frontend URL).
+- `GET /health` endpoint for Docker image testing.
+- Database seeds for deployment:
+  - Admin user
+  - Device writer
+  - Mock air quality data
+- Production deployment scripts in `package.json`.
+- HTTPS support for secure communication.
+- Scripts for image push and deployment automation.
+- Added `docker-compose` for container orchestration.
+- Added `Dockerfile` for API containerization.
+- Added `.dockerignore` for cleaner Docker builds.
+
+### Changed
+
+- Disabled `POST /auth/register` endpoint.
+- Improved `.env.example` documentation for clarity.
+
+### Fixed
+
+- Air Quality endpoint:
+  - Fixed data creation endpoint to no longer require login, only API key.
+
 ## [5.0.0]
 
 ### Added
