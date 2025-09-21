@@ -7,12 +7,11 @@ export function DashboardHeader({ latestEntry }: { latestEntry: AirQuality | nul
 
   if (latestEntry) {
     formatted = new Date(latestEntry.timestamp).toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
       year: 'numeric',
+      month: 'long',
+      day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false,
     });
   }
 
