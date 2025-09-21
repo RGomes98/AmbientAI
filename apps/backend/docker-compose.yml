@@ -31,4 +31,3 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - api
-    env_file: .env
