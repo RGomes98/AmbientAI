@@ -10,21 +10,13 @@ app.register(base);
 app.register(auth);
 app.register(airQuality);
 
-// Development Server
-if (ENV.NODE_ENV === 'development') {
-  (async function initDevServer() {
-    try {
-      await app.listen({ port: ENV.PORT });
-      console.info(`Server listening at http://localhost:${ENV.PORT}`);
-    } catch (error) {
-      console.error('Failed to start the development server:', error);
-      process.exit(1);
-    }
-  })();
-}
-
-// Vercel's Serverless Function Entry Point
-export default async function handler(request: any, reply: any) {
-  await app.ready();
-  app.server.emit('request', request, reply);
-}
+// Server Entry Point
+(async function initServer() {
+  try {
+    await app.listen({ port: ENV.PORT, host: '0.0.0.0' });
+    console.info(`Server listening at http://localhost:${ENV.PORT}`);
+  } catch (error) {
+    console.error('Failed to start the development server:', error);
+    process.exit(1);
+  }
+})();

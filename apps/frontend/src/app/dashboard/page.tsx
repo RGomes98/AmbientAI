@@ -48,7 +48,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
         <DashboardHeader latestEntry={latestData} />
         <div className='flex flex-1 flex-col'>
           <div className='@container/main flex flex-1 flex-col gap-2'>
-            <div className='grid grid-rows-[auto_auto_auto] gap-4 py-4 md:gap-4 md:py-4'>
+            <div className='grid h-full grid-rows-[fit-content(100%)_fit-content(100%)_auto] gap-4 py-4 md:gap-4 md:py-4'>
               <SectionCards latestEntry={latestData} averages={averages} />
               <SectionGraphics latestEntry={latestData} />
               <ChartAreaInteractive data={chartData} />

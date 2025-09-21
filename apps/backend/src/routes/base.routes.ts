@@ -50,7 +50,18 @@ const html = `
 `;
 
 export const base = async (instance: FastifyTypedInstance) => {
-  instance.get('/', { schema: { hide: true } }, async (_request: FastifyRequest, reply: FastifyReply) => {
-    return reply.status(200).type('text/html').send(html);
-  });
+  instance.get(
+    '/',
+    { schema: { hide: true, tags: ['Core'] } },
+    async (_request: FastifyRequest, reply: FastifyReply) => {
+      return reply.status(200).type('text/html').send(html);
+    }
+  );
+  instance.get(
+    '/health',
+    { schema: { tags: ['Core'] } },
+    async (_request: FastifyRequest, reply: FastifyReply) => {
+      return reply.status(200).send({ status: 'OK' });
+    }
+  );
 };
