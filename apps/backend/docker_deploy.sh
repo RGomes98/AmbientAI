@@ -129,7 +129,7 @@ case "$OPTION" in
 
     echo "🔹 Updating existing containers..."
     docker pull "$FULL_IMAGE" || true
-    docker compose up -d --no-deps --build api
+    docker compose up -d --build --force-recreate api nginx db
     docker compose exec api npm run prisma:migrate:prod
     ;;
 
