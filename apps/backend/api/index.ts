@@ -10,9 +10,8 @@ app.register(base);
 app.register(auth);
 app.register(airQuality);
 
-// Development Server
-
-(async function initDevServer() {
+// Server Entry Point
+(async function initServer() {
   try {
     await app.listen({ port: ENV.PORT, host: '0.0.0.0' });
     console.info(`Server listening at http://localhost:${ENV.PORT}`);
