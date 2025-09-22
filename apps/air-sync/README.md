@@ -28,7 +28,7 @@ This will start the loop to fetch data from the Arduino, send it to the backend,
 If you want to simulate Arduino data:
 
 ```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 Ensure a `fake_data` JSON file exists in the project root with sample Arduino data.
