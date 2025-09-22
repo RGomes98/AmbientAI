@@ -56,7 +56,7 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
   }
 
   return (
-    <Card className='@container/card mx-4 lg:mx-4'>
+    <Card className='@container/card mx-4 min-h-[335px] lg:mx-4'>
       <CardHeader>
         <CardTitle className='hidden @[540px]/card:block'>Índice de Qualidade do Ar (AQI)</CardTitle>
         <CardTitle className='@[540px]/card:hidden'>Índice de Qualidade</CardTitle>
@@ -144,7 +144,6 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
               />
               <YAxis tickLine={false} axisLine={false} tickMargin={8} width={30} />
               <ChartTooltip
-                cursor={false}
                 defaultIndex={isMobile ? -1 : 10}
                 content={
                   <ChartTooltipContent

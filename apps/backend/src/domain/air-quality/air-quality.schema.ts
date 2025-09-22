@@ -18,10 +18,7 @@ const AirQualitySchema = z.object({
   noxRaw: z.number(),
 });
 
-const AirQualityCreateSchema = AirQualitySchema.omit({
-  id: true,
-  timestamp: true,
-});
+const AirQualityCreateSchema = AirQualitySchema.omit({ id: true });
 
 const AirQualityQuerySchema = z.object({
   take: z.coerce.number().int().min(1).max(200).optional(),
