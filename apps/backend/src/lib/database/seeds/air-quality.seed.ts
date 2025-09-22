@@ -4,11 +4,12 @@ import { join } from 'path';
 import { AirQualityValueObject } from '../../../domain/air-quality/air-quality.value-object';
 import { Seed } from '../../../utils/seed.util';
 import { prisma } from '../prisma.database';
+import { ENV } from '../../../env';
 
 async function seed() {
   console.info('🌱 Starting the air quality data seeding process...');
 
-  const isProd = __dirname.includes('dist');
+  const isProd = ENV.NODE_ENV === 'production';
   const basePath = isProd ? join(process.cwd(), 'dist') : process.cwd();
   const filePath = join(basePath, 'src/data/mock_air_quality.json');
   const rawData = readFileSync(filePath, 'utf-8');
@@ -16,7 +17,7 @@ async function seed() {
   const now = new Date();
   const startOfYear = new Date(now.getFullYear(), 0, 1);
 
-  const parsedData = AirQualityValueObject.validate(JSON.parse(rawData));
+  const parsedData = AirQualityValueObject.validateMock(JSON.parse(rawData));
   const timestamps = Seed.generateUniqueTimestamps({
     count: parsedData.length,
     from: startOfYear,

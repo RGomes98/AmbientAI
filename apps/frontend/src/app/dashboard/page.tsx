@@ -28,7 +28,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
 
   const end = now.toISOString();
   const start = startDate.toISOString();
-  const query = { take: String(200), startTimestamp: start, endTimestamp: end };
+  const query = { startTimestamp: start, endTimestamp: end };
 
   const averages = await getWeeklyAverages();
   const latestData = await getLatestAirQuality();

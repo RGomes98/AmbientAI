@@ -3,7 +3,7 @@ import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } f
 import { AlertCircle } from 'lucide-react';
 
 type GaugeChartProps = {
-  value?: number;
+  value: number | null;
   maxValue: number;
   label: string;
   description: string;
@@ -25,9 +25,9 @@ export function GaugeChart({
   endAngle = 0,
   startAngle = 180,
 }: GaugeChartProps) {
-  if (!value) {
+  if (value === null) {
     return (
-      <div className='from-primary/5 to-card dark:from-primary/10 dark:to-card flex h-[250px] w-full flex-col items-center justify-center gap-2 rounded-xl bg-gradient-to-t p-4 text-center shadow-xs'>
+      <div className='from-primary/5 to-card dark:from-primary/10 dark:to-card my-6 flex h-[175px] w-full flex-col items-center justify-center gap-2 rounded-xl bg-gradient-to-t p-4 text-center shadow-xs'>
         <AlertCircle className='text-muted-foreground/60 h-10 w-10' />
         <span className='text-foreground text-lg font-semibold'>Sem Leitura</span>
         <span className='text-muted-foreground text-sm'>
@@ -55,7 +55,7 @@ export function GaugeChart({
     <div className='relative h-full w-fit'>
       <ChartContainer
         config={chartConfig}
-        className='mx-auto aspect-square w-full max-w-[250px] min-w-[250px]'
+        className='mx-auto aspect-square w-full max-w-[225px] min-w-[225px]'
       >
         <RadialBarChart
           cx='50%'
@@ -63,8 +63,8 @@ export function GaugeChart({
           data={data}
           startAngle={startAngle}
           endAngle={endAngle}
-          innerRadius={105}
-          outerRadius={150}
+          innerRadius={95}
+          outerRadius={135}
         >
           <PolarAngleAxis type='number' domain={[0, totalAngleSpan]} tick={false} />
           <RadialBar dataKey='value' fill={color} background={{ fill: '#eee' }} cornerRadius={5} />
@@ -95,14 +95,14 @@ export function GaugeChart({
       </ChartContainer>
       <div className='absolute top-[52%] left-[50%] z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col gap-1 text-center'>
         <div className='flex items-end justify-center gap-0.5'>
-          <span className='text-foreground font-poppins text-[1.25rem] leading-none font-semibold'>
+          <span className='text-foreground font-poppins text-[1rem] leading-none font-semibold'>
             {value.toFixed(1)}
           </span>
-          <span className='text-foreground font-poppins text-[0.75rem] leading-3.5 font-semibold'>
+          <span className='text-foreground font-poppins text-[0.65rem] leading-3.5 font-semibold'>
             {units}
           </span>
         </div>
-        <span className='text-foreground font-roboto text-[0.85rem]'>{description}</span>
+        <span className='text-foreground font-roboto text-[0.75rem]'>{description}</span>
       </div>
       <div className='font-poppins text-foreground absolute bottom-12 flex w-full items-center justify-between px-2 text-sm font-semibold'>
         <span>{minValue}</span>

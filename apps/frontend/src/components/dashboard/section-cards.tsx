@@ -34,7 +34,7 @@ function getTrend(
   switch (interpretation) {
     case 'lowerIsBetter':
       return {
-        percent: Number(Math.abs(percent).toFixed(1)),
+        percent: Number(-percent.toFixed(1)),
         icon: isUp ? IconTrendingDown : IconTrendingUp,
         text: isUp ? 'Tendência de piora' : 'Tendência de melhora',
       };
