@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.2]
+
+### Changed
+
+- Improved the layout of gauge charts for better readability and consistency.
+
+### Fixed
+
+- Removed the `take` query parameter to prevent incorrect data rendering in line charts.
+- Corrected the display of percentages in the dashboard AQI card by adding the proper symbol.
+- Corrected the display of the latest air quality data timestamp in the header, which previously showed an incorrect offset due to wrong timezone handling.
+
 ## [2.0.1]
 
 ### Changed

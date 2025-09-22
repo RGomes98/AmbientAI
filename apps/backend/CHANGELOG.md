@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.0.1]
+
+### Added
+
+- Local timezone configuration for API and Database services in `docker-compose`.
+
+### Changed
+
+- Made the `timestamp` field in air quality data mandatory to ensure consistent data integrity.
+
+### Fixed
+
+- Improved air quality seeding logic by using `NODE_ENV` instead of `__dirname`, fixing the `__dirname is not defined` error in certain environments.
+
 ## [6.0.0]
 
 ### Added
