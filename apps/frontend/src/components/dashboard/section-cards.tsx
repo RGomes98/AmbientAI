@@ -58,20 +58,24 @@ export function SectionCards({ latestEntry, averages }: SectionCardsProps) {
   const cards = [
     {
       description: 'Temperatura Atual',
-      value: latestEntry ? `${latestEntry.temperature}°C` : null,
-      trend: averages ? getTrend(averages.thisWeekAvg.temperature, averages.lastWeekAvg.temperature) : null,
+      value: latestEntry ? `${latestEntry.atmpCompensated}°C` : null,
+      trend: averages
+        ? getTrend(averages.thisWeekAvg.atmpCompensated, averages.lastWeekAvg.atmpCompensated)
+        : null,
       footerDetail: 'Comparado à média da última semana',
     },
     {
       description: 'Umidade Atual',
-      value: latestEntry ? `${latestEntry.humidity}%` : null,
-      trend: averages ? getTrend(averages.thisWeekAvg.humidity, averages.lastWeekAvg.humidity) : null,
+      value: latestEntry ? `${latestEntry.rhumCompensated}%` : null,
+      trend: averages
+        ? getTrend(averages.thisWeekAvg.rhumCompensated, averages.lastWeekAvg.rhumCompensated)
+        : null,
       footerDetail: 'Comparado à média da última semana',
     },
     {
       description: 'Concentração de CO₂',
-      value: latestEntry ? `${latestEntry.co2} ppm` : null,
-      trend: averages ? getTrend(averages.thisWeekAvg.co2, averages.lastWeekAvg.co2) : null,
+      value: latestEntry ? `${latestEntry.rco2} ppm` : null,
+      trend: averages ? getTrend(averages.thisWeekAvg.rco2, averages.lastWeekAvg.rco2) : null,
       footerDetail: 'Comparado à média da última semana',
     },
     {
