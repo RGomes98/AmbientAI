@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.0.0]
+
+### Changed
+
+- Improved push and deployment scripts for better automation and reliability.
+- Updated the `AirQualityMeasurement` table, including migrations for the new schema.
+- Updated mock seed data to populate the `AirQualityMeasurement` table.
+- Updated Zod schema validation for `AirQualityMeasurement` data to match the new table structure.
+
 ## [6.0.1]
 
 ### Added

@@ -77,6 +77,7 @@ wait_for_api() {
 
 # Local build
 echo "🔹 Step 1: Testing local TypeScript build..."
+npx prisma generate
 npm run build
 echo "✅ Local build OK!"
 
@@ -113,12 +114,11 @@ wait_for_api
 
 # Docker Hub push
 echo "🔹 Step 5: Logging in to Docker Hub..."
-echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin >/dev/null
+echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 
 echo "🔹 Step 6: Pushing image to Docker Hub..."
-docker push "$FULL_IMAGE" >/dev/null
+docker push "$FULL_IMAGE"
 
-docker logout >/dev/null
+docker logout
 echo "✅ Docker Hub logout completed, credentials cleared"
-
 echo "🎉 Deploy successfully completed! -> $FULL_IMAGE"
