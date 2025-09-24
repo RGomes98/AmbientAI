@@ -88,10 +88,6 @@ case "$OPTION" in
     # Enable cleanup protection only during creation
     CREATING_DEPLOY=true
 
-    echo "⚠️ Creating deployment from scratch..."
-    docker compose down -v --remove-orphans
-    docker network inspect "$NETWORK_NAME" >/dev/null 2>&1 && docker network rm "$NETWORK_NAME"
-
     echo "🔹 Building images..."
     docker compose build --no-cache
     echo "🔹 Starting containers..."
@@ -154,4 +150,3 @@ case "$OPTION" in
 esac
 
 echo "🎉 Deployment successfully completed!"
-docker compose ps
