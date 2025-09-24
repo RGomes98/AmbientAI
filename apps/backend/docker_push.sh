@@ -77,7 +77,7 @@ wait_for_api() {
 
 # Local build
 echo "🔹 Step 1: Testing local TypeScript build..."
-npx prisma migrate deploy
+npx prisma generate
 npm run build
 echo "✅ Local build OK!"
 
