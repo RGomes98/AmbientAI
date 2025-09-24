@@ -10,14 +10,14 @@ export class AirQualityQueryBuilder {
     const { minTemperature, maxTemperature } = this.query;
 
     if (minTemperature !== null || maxTemperature !== null) {
-      this.where.temperature = {};
+      this.where.atmpCompensated = {};
 
       if (minTemperature !== null) {
-        this.where.temperature.gte = minTemperature;
+        this.where.atmpCompensated.gte = minTemperature;
       }
 
       if (maxTemperature !== null) {
-        this.where.temperature.lte = maxTemperature;
+        this.where.atmpCompensated.lte = maxTemperature;
       }
     }
   }

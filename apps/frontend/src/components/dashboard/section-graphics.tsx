@@ -42,7 +42,7 @@ export function SectionGraphics({ latestEntry }: { latestEntry: AirQuality | nul
           color='#eab308'
         />
         <GaugeChart
-          value={latestEntry?.co2 ?? null}
+          value={latestEntry?.rco2 ?? null}
           maxValue={2000}
           label='CO₂'
           description='Dióxido de Carbono'

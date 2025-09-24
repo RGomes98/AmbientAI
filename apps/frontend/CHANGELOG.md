@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0]
+
+### Changed
+
+- Updated schemas and layout to support the new `AirQualityMeasurement` table structure.
+- Improved frontend components and dashboard layout to handle new data structure consistently.
+
 ## [2.0.2]
 
 ### Changed
