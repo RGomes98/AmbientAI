@@ -60,7 +60,7 @@ export function SectionCards({ latestEntry, averages }: SectionCardsProps) {
       description: 'Temperatura Atual',
       value: latestEntry ? `${latestEntry.atmpCompensated}°C` : null,
       trend: averages
-        ? getTrend(averages.thisWeekAvg.atmpCompensated, averages.lastWeekAvg.atmpCompensated)
+        ? getTrend(Number(averages.thisWeekAvg.atmpCompensated), Number(averages.lastWeekAvg.atmpCompensated))
         : null,
       footerDetail: 'Comparado à média da última semana',
     },
@@ -68,14 +68,14 @@ export function SectionCards({ latestEntry, averages }: SectionCardsProps) {
       description: 'Umidade Atual',
       value: latestEntry ? `${latestEntry.rhumCompensated}%` : null,
       trend: averages
-        ? getTrend(averages.thisWeekAvg.rhumCompensated, averages.lastWeekAvg.rhumCompensated)
+        ? getTrend(Number(averages.thisWeekAvg.rhumCompensated), Number(averages.lastWeekAvg.rhumCompensated))
         : null,
       footerDetail: 'Comparado à média da última semana',
     },
     {
       description: 'Concentração de CO₂',
       value: latestEntry ? `${latestEntry.rco2} ppm` : null,
-      trend: averages ? getTrend(averages.thisWeekAvg.rco2, averages.lastWeekAvg.rco2) : null,
+      trend: averages ? getTrend(Number(averages.thisWeekAvg.rco2), Number(averages.lastWeekAvg.rco2)) : null,
       footerDetail: 'Comparado à média da última semana',
     },
     {
@@ -83,7 +83,7 @@ export function SectionCards({ latestEntry, averages }: SectionCardsProps) {
       value: latestEntry ? calculateAqi(latestEntry).category : null,
       valueColor: latestEntry ? airQualityColorMap[calculateAqi(latestEntry).category] : null,
       trend: averages
-        ? getTrend(averages.thisWeekAvg.pm02, averages.lastWeekAvg.pm02, 'lowerIsBetter')
+        ? getTrend(Number(averages.thisWeekAvg.pm02), Number(averages.lastWeekAvg.pm02), 'lowerIsBetter')
         : null,
       footerDetail: 'Comparado à média da última semana',
     },
