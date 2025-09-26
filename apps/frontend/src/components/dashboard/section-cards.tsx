@@ -83,7 +83,11 @@ export function SectionCards({ latestEntry, averages }: SectionCardsProps) {
       value: latestEntry ? calculateAqi(latestEntry).category : null,
       valueColor: latestEntry ? airQualityColorMap[calculateAqi(latestEntry).category] : null,
       trend: averages
-        ? getTrend(Number(averages.thisWeekAvg.pm02), Number(averages.lastWeekAvg.pm02), 'lowerIsBetter')
+        ? getTrend(
+            Number(averages.thisWeekAvg.pm02Compensated),
+            Number(averages.lastWeekAvg.pm02Compensated),
+            'lowerIsBetter',
+          )
         : null,
       footerDetail: 'Comparado à média da última semana',
     },

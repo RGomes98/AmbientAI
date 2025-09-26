@@ -4,28 +4,26 @@ import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { BarChart2 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { AirQuality } from '@/lib/schemas/air-quality.schema';
-import { calculateAqi } from '@/utils/air-quality.util';
 import { Query } from '@/utils/query.util';
 import { useMobile } from '@/hooks/shared/useMobile.hook';
 import { DayRangeQueryParamSchema } from '@/lib/schemas/query.schema';
 
 const chartConfig = {
   value: {
-    label: 'AQI',
+    label: 'Poluentes Orgânicos (Índice):\u00A0\u00A0',
     color: 'var(--primary)',
   },
 } satisfies ChartConfig;
 
 const timeRangeDescriptions: { [key: string]: { long: string; short: string } } = {
-  '14d': { long: 'Total para os últimos 14 dias', short: 'Últimos 14 dias' },
-  '7d': { long: 'Total para os últimos 7 dias', short: 'Últimos 7 dias' },
-  '1d': { long: 'Total para as últimas 24 horas', short: 'Últimas 24 horas' },
+  '14d': { long: 'Níveis de poluentes orgânicos dos últimos 14 dias', short: 'Últimos 14 dias' },
+  '7d': { long: 'Níveis de poluentes orgânicos dos últimos 7 dias', short: 'Últimos 7 dias' },
+  '1d': { long: 'Níveis de poluentes orgânicos nas últimas 24 horas', short: 'Últimas 24 horas' },
 };
 
 export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
@@ -37,9 +35,7 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
   const router = useRouter();
 
   const currentDescription = timeRangeDescriptions[timeRange];
-  const chartData = data
-    .toReversed()
-    .map((data) => ({ value: calculateAqi(data).aqi, timestamp: data.timestamp }));
+  const chartData = data.toReversed().map((data) => ({ value: data.tvocIndex, timestamp: data.timestamp }));
 
   function handleChangeTimeRange(range: string) {
     if (typeof window === 'undefined') return;
@@ -58,8 +54,8 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
   return (
     <Card className='@container/card mx-4 min-h-[335px] lg:mx-4'>
       <CardHeader>
-        <CardTitle className='hidden @[540px]/card:block'>Índice de Qualidade do Ar (AQI)</CardTitle>
-        <CardTitle className='@[540px]/card:hidden'>Índice de Qualidade</CardTitle>
+        <CardTitle className='hidden @[540px]/card:block'>Poluentes Orgânicos Voláteis</CardTitle>
+        <CardTitle className='@[540px]/card:hidden'>Poluentes Orgânicos</CardTitle>
         <CardDescription>
           <span className='hidden @[540px]/card:block'>{currentDescription.long}</span>
           <span className='@[540px]/card:hidden'>{currentDescription.short}</span>
@@ -93,9 +89,9 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
             <SelectTrigger
               className='flex w-40 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden'
               size='sm'
-              aria-label='Select a value'
+              aria-label='Selecione o período'
             >
-              <SelectValue placeholder='Last 3 months' />
+              <SelectValue placeholder='Selecione o período' />
             </SelectTrigger>
             <SelectContent className='rounded-xl'>
               <SelectItem value='14d' className='cursor-pointer rounded-lg'>
@@ -118,7 +114,7 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
               <BarChart2 className='text-muted-foreground/70 h-12 w-12' />
               <h3 className='text-lg font-semibold'>Nenhum dado disponível</h3>
               <p className='text-muted-foreground max-w-sm text-sm'>
-                Não encontramos registros para o período selecionado. Tente ajustar os filtros ou escolher
+                Não há dados de poluentes orgânicos para o período selecionado. Ajuste os filtros ou escolha
                 outro intervalo de tempo.
               </p>
             </div>

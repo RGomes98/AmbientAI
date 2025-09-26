@@ -104,7 +104,7 @@ export function GaugeChart({
         </div>
         <span className='text-foreground font-roboto text-[0.75rem]'>{description}</span>
       </div>
-      <div className='font-poppins text-foreground absolute bottom-12 flex w-full items-center justify-between px-2 text-sm font-semibold'>
+      <div className='font-poppins text-foreground absolute bottom-12 flex w-full items-center justify-between pr-0.5 pl-2 text-sm font-semibold'>
         <span>{minValue}</span>
         <span>{maxValue}</span>
       </div>
