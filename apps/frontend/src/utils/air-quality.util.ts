@@ -48,8 +48,8 @@ function getAqiCategory(aqi: number) {
 }
 
 export function calculateAqi(airQualityData: AirQuality) {
-  const aqiPm25 = calculateSubAqi('pm25', airQualityData.pm02);
-  const aqiPm10 = calculateSubAqi('pm10', airQualityData.pm10);
+  const aqiPm25 = calculateSubAqi('pm25', airQualityData.pm02Standard);
+  const aqiPm10 = calculateSubAqi('pm10', airQualityData.pm10Standard);
 
   const finalAqi = Math.max(aqiPm25, aqiPm10);
   const category = getAqiCategory(finalAqi);

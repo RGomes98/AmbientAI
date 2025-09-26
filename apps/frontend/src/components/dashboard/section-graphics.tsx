@@ -18,32 +18,40 @@ export function SectionGraphics({ latestEntry }: { latestEntry: AirQuality | nul
       </CardHeader>
       <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-items-center gap-2 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-4'>
         <GaugeChart
-          value={latestEntry?.pm01 ?? null}
+          value={latestEntry?.pm01Count ?? null}
           maxValue={150}
           label='PM₀.₁'
           description='Partículas Ultrafinas'
-          units='µg/m³'
+          units='/0.1L'
           color='#0ea5e9'
         />
         <GaugeChart
-          value={latestEntry?.pm02 ?? null}
-          maxValue={150}
+          value={latestEntry?.pm02Count ?? null}
+          maxValue={25}
           label='PM₂.₅'
           description='Partículas Finas'
-          units='µg/m³'
+          units='/0.1L'
           color='#f97316'
         />
         <GaugeChart
-          value={latestEntry?.pm10 ?? null}
-          maxValue={300}
-          label='PM₁₀'
-          description='Partículas Grossas'
-          units='µg/m³'
+          value={latestEntry?.pm003Count ?? null}
+          maxValue={500}
+          label='PM₀.₃'
+          description='Partículas Médias'
+          units='/0.1L'
           color='#eab308'
         />
         <GaugeChart
+          value={latestEntry?.pm005Count ?? null}
+          maxValue={500}
+          label='PM₀.₅'
+          description='Partículas Grossas'
+          units='/0.1L'
+          color='#14b8a6'
+        />
+        <GaugeChart
           value={latestEntry?.rco2 ?? null}
-          maxValue={2000}
+          maxValue={5000}
           label='CO₂'
           description='Dióxido de Carbono'
           units='ppm'
@@ -51,7 +59,7 @@ export function SectionGraphics({ latestEntry }: { latestEntry: AirQuality | nul
         />
         <GaugeChart
           value={latestEntry?.tvocIndex ?? null}
-          maxValue={1000}
+          maxValue={500}
           label='TVOC'
           description='Compostos Voláteis'
           units=' Índice'
