@@ -131,7 +131,7 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
             }}
           >
             <SelectTrigger
-              className='w-40 cursor-pointer max-sm:w-fit'
+              className='w-fit cursor-pointer max-sm:w-fit'
               size='sm'
               aria-label='Selecione o período'
             >
