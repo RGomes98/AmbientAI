@@ -11,6 +11,19 @@ logging.basicConfig(
     format='[%(asctime)s] %(levelname)s: %(message)s'
 )
 
+required_fields = [
+        "pm01", "pm02", "pm10",
+        "pm01Standard", "pm02Standard", "pm10Standard",
+        "pm003Count", "pm005Count", "pm01Count", "pm02Count",
+        "atmp", "atmpCompensated",
+        "rhum", "rhumCompensated",
+        "pm02Compensated",
+        "rco2",
+        "tvocIndex", "tvocRaw",
+        "noxIndex", "noxRaw",
+        "boot", "bootCount", "wifi",
+        "serialno", "firmware", "model",
+    ]
 
 class AirSync:
     def __init__(self, arduino_url: str, api_url: str, api_key: str, pending_file: str, interval: int):
@@ -37,6 +50,11 @@ class AirSync:
         except Exception as e:
             logging.warning(f"Failed to fetch from Arduino: {e}")
             return None
+        
+    def is_valid_payload(self, payload: dict) -> bool:
+        """Check if payload has the required fields for API."""
+        return all(field in payload for field in required_fields)
+
 
     def add_timestamp(self, payload: dict) -> dict:
         """Add current datetime to payload."""
@@ -99,10 +117,11 @@ class AirSync:
         while True:
             payload = self.fetch_from_arduino()
 
-            if payload:
+            if payload and self.is_valid_payload(payload):
                 payload = self.add_timestamp(payload)
                 if not self.send_to_api([payload]):
                     self.save_pending(payload)
 
+            logging.info("AirSync cycle completed, checking pending payloads...")
             self.resend_pending()
             time.sleep(self.interval)
