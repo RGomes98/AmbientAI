@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Projeto de Iniciação Tecnológica: AMBIENTAI
 
-## Getting Started
+Este repositório contém o código-fonte do frontend da plataforma **AMBIENTAI**.
+O sistema foi desenvolvido como parte de uma iniciativa de pesquisa tecnológica da Pró-reitoria de Pesquisa e Pós-Graduação do UniFOA e implementado em parceria com o **CIEP 291 Dom Martinho Schlude**.
 
-First, run the development server:
+### 📌 Descrição do Projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O **AMBIENTAI** é uma aplicação web interativa que apresenta dados de qualidade do ar em tempo real, coletados por sensores ambientais integrados à plataforma.
+A interface foi desenvolvida para ser **responsiva e acessível**, permitindo que a comunidade escolar e a população local acompanhem indicadores ambientais e compreendam sua importância por meio de uma experiência educativa.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O projeto une **Design, Sistemas de Informação e Educação Ambiental** para sensibilizar a comunidade de Pinheiral-RJ sobre sustentabilidade e mudanças climáticas.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🎯 Objetivos
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### Para a Comunidade
 
-## Learn More
+- Fornecer acesso simples e direto a dados de qualidade do ar.
+- Promover a **educação ambiental** por meio de visualizações interativas e didáticas.
+- Incentivar práticas sustentáveis e a conscientização socioambiental.
 
-To learn more about Next.js, take a look at the following resources:
+#### Para Pesquisadores e Estudantes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Aplicar conceitos de **Data Visualization** e **Design de Interfaces**.
+- Integrar dados provenientes de sensores e APIs com **visualização em dashboards dinâmicos**.
+- Desenvolver uma aplicação prática e escalável para apoiar **práticas pedagógicas** em educação ambiental.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### ⚙️ Ferramentas e Bibliotecas Utilizadas
 
-## Deploy on Vercel
+- **Next.js 15** → Framework React moderno para SSR/SSG.
+- **React 19** → Biblioteca principal para construção da interface.
+- **Tailwind CSS 4** → Utilizado para estilização rápida e responsiva.
+- **Radix UI** → Conjunto de componentes acessíveis e personalizáveis (Dialog, Tooltip, Tabs, Select, etc.).
+- **Lucide-react** e **Tabler Icons** → Ícones modernos e leves para UI.
+- **TanStack React Table** → Criação de tabelas dinâmicas e interativas.
+- **Recharts** → Visualização de métricas ambientais em gráficos interativos.
+- **Sonner** → Sistema de notificações no frontend.
+- **Next Themes** → Suporte a temas dinâmicos (claro/escuro).
+- **Zod** → Validação de dados para garantir consistência entre frontend e backend.
+- **Vaul** → Implementação de drawers acessíveis.
+- **Tailwind Merge** + **Class Variance Authority (CVA)** → Utilitários para gerenciar e compor classes CSS de forma consistente.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🌍 Links
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Link do site**: [AmbientAI](https://ambient-ai-frontend.vercel.app/)
+
+### 📸 Screenshots
+
+- **Login e Autenticação**
+
+![Login](./screenshots/login.png)
+
+- **Dashboard (Visão Geral)**
+
+![Dashboard](./screenshots/dashboard.png)

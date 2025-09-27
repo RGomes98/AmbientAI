@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0]
+
+### Added
+
+- Ability to select which type of metric to display in charts.  
+  Supported metrics now include:
+  - TVOC (Total Volatile Organic Compounds)
+  - CO₂ (Carbon Dioxide)
+  - NOx (Nitrogen Oxides)
+  - PM1.0 (Particulate Matter 1.0)
+  - PM2.5 (Particulate Matter 2.5)
+  - PM10 (Particulate Matter 10)
+  - Air Temperature
+  - Relative Humidity
+
+### Changed
+
+- Updated `AirQualityAverageSchema` to allow null values.
+- Normalized displayed values to use sensor-compensated readings instead of raw data.
+- Improved heading layout on mobile screens for better readability.
+- Added a new gauge to display coarse particulate matter levels.
+
 ## [3.0.0]
 
 ### Changed

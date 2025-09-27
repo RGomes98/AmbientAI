@@ -59,7 +59,7 @@ export function ChartAreaInteractive({ data }: { data: AirQuality[] }) {
   const searchParams = useSearchParams();
   const initialRange = DayRangeQueryParamSchema.parse(searchParams.get('range'));
 
-  const [selectedMetric, setSelectedMetric] = useState<Metric>('atmpCompensated');
+  const [selectedMetric, setSelectedMetric] = useState<Metric>('tvocIndex');
   const [timeRange, setTimeRange] = useState<string>(initialRange);
   const isMobile = useMobile();
   const router = useRouter();
