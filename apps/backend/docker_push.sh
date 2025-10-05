@@ -83,7 +83,7 @@ echo "✅ Local build OK!"
 
 # Docker build
 echo "🔹 Step 2: Building Docker image..."
-docker build -t "$FULL_IMAGE" . >/dev/null
+docker build -t "$FULL_IMAGE" .
 echo "✅ Image built: $FULL_IMAGE"
 
 # Temporary network and database
