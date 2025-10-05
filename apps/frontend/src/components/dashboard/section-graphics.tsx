@@ -35,7 +35,7 @@ export function SectionGraphics({ latestEntry }: { latestEntry: AirQuality | nul
         />
         <GaugeChart
           value={latestEntry?.pm003Count ?? null}
-          maxValue={500}
+          maxValue={1500}
           label='PM₀.₃'
           description='Partículas Médias'
           units='/0.1L'
@@ -43,7 +43,7 @@ export function SectionGraphics({ latestEntry }: { latestEntry: AirQuality | nul
         />
         <GaugeChart
           value={latestEntry?.pm005Count ?? null}
-          maxValue={500}
+          maxValue={1500}
           label='PM₀.₅'
           description='Partículas Grossas'
           units='/0.1L'
@@ -59,7 +59,7 @@ export function SectionGraphics({ latestEntry }: { latestEntry: AirQuality | nul
         />
         <GaugeChart
           value={latestEntry?.tvocIndex ?? null}
-          maxValue={500}
+          maxValue={1500}
           label='TVOC'
           description='Compostos Voláteis'
           units=' Índice'
